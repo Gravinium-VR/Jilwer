@@ -1,0 +1,14 @@
+{
+  "name": "org.gravinium.jilwer",
+  "displayName": "Jilwer",
+  "description": "TODO",
+  "version": "0.1.0",
+  "unity": "2022.3",
+  "vrchatVersion": "2022.1.1",
+  "author": {
+    "name": "Nighthawk",
+    "email": "nighthawkvrc@gmail.com",
+    "url": "https://nighthawk.gravinium.org"
+  },
+  "license": "MIT"
+}
