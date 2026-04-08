@@ -1,0 +1,15 @@
+{
+    "name": "org.gravinium.jilwer.vrc",
+    "references": [
+        "org.gravinium.jilwer.core"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

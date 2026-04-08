@@ -2,9 +2,9 @@
 
 public class ExampleEditorScript
 {
-    [MenuItem("Gravinium/Jilwer/Test")]
+    [MenuItem("Gravinium/Jilwer/Help")]
     static void Test()
     {
-        EditorUtility.DisplayDialog("Example Script", "Opened This Dialog", "OK");
+        EditorUtility.DisplayDialog("Jilwer Help", "Good luck...", "OK");
     }
 }

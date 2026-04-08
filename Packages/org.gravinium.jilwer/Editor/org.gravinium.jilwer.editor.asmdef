@@ -1,0 +1,18 @@
+{
+    "name": "org.gravinium.jilwer.editor",
+    "references": [
+        "org.gravinium.jilwer.core",
+        "org.gravinium.jilwer.vrc"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
