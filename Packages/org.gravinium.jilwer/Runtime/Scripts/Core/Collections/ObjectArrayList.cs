@@ -3,64 +3,72 @@ using UnityEngine;
 
 namespace Org.Gravinium.Jilwer.Runtime.Core.Collections
 {
-    public class ObjectArrayList : ICollection
+    public class ObjectArrayList : UdonSharpBehaviour
     {
-        private int count;
-        private object[] items;
+        private int _count;
+        private object[] _items;
 
-        public ObjectArrayList(int size = 4)
+        public static ObjectArrayList New(int size = 4)
         {
-            count = 0;
-            items = new object[size];
+            GameObject result = ObjectRegistry.Get(ObjectRegistry.ObjectArrayList);
+            ObjectArrayList component = result.GetComponent<ObjectArrayList>();
+
+            if (component.GetType().ToString() != "ObjectArrayList")
+            {
+                Debug.LogError("[Jilwer] Component is an incorrect type");
+                return null;
+            }
+
+            return component;
         }
 
         public int Length()
         {
-            return count;
+            return _count;
         }
 
         public void Add(object item)
         {
-            if (count >= items.Length)
+            if (_count >= _items.Length)
             {
-                object[] newItems = new object[count * 2];
-                for (int i = 0; i < count; i++)
+                object[] newItems = new object[_count * 2];
+                for (int i = 0; i < _count; i++)
                 {
-                    newItems[i] = items[i];
+                    newItems[i] = _items[i];
                 }
-                items = newItems;
+                _items = newItems;
             }
 
-            items[count] = item;
-            count++;
+            _items[_count] = item;
+            _count++;
         }
 
         public object Get(int index)
         {
-            if (count <= 0) return null;
-            if (index >= count)
+            if (_count <= 0) return null;
+            if (index >= _count)
             {
-                Debug.LogError($"[Jilwer] Index Out Of Bounds! Index: {index} > Count: {count}");
+                Debug.LogError($"[Jilwer] Index Out Of Bounds! Index: {index} > Count: {_count}");
             }
 
-            return items[index];
+            return _items[index];
         }
 
         public void Remove(int index)
         {
-            if (count <= 0) return;
-            if (index >= count)
+            if (_count <= 0) return;
+            if (index >= _count)
             {
-                Debug.LogError($"[Jilwer] Index Out Of Bounds! Index: {index} > Count: {count}");
+                Debug.LogError($"[Jilwer] Index Out Of Bounds! Index: {index} > Count: {_count}");
             }
 
-            for (int i = index; i < count - 1; i++)
+            for (int i = index; i < _count - 1; i++)
             {
-                items[i] = items[i + 1];
+                _items[i] = _items[i + 1];
             }
 
-            items[count - 1] = null;
-            count--;
+            _items[_count - 1] = null;
+            _count--;
         }
     }
 }

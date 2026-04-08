@@ -7,8 +7,13 @@ using Org.Gravinium.Jilwer.Runtime.Core.Collections;
 [UdonBehaviourSyncMode(BehaviourSyncMode.None)]
 public class ArrayListTester : UdonSharpBehaviour
 {
-    private ObjectArrayList list = new ObjectArrayList();
+    private ObjectArrayList list;
     private int counter = 1;
+
+    void Start()
+    {
+        list = ObjectArrayList.New();
+    }
 
     public override void Interact()
     {
@@ -18,9 +23,8 @@ public class ArrayListTester : UdonSharpBehaviour
         string msg = "[";
         for (int i = 0; i < list.Length(); i++)
         {
-            msg += list.Get(i) + (list.Length() - 1 < i ? ", " : "");
+            msg += list.Get(i) + (list.Length() - 1 < i ? ", " : "]");
         }
-        msg += "]";
         Debug.Log("[ArrayListTester] ");
     }
 }
