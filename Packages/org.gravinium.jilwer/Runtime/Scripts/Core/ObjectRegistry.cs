@@ -19,6 +19,8 @@ namespace Org.Gravinium.Jilwer.Runtime.Core
         public static GameObject Get(int id)
         {
             ObjectRegistry reg = GameObject.Find("Jilwer__ObjectRegistry").GetComponent<ObjectRegistry>();
+            Debug.Log("[Jilwer] " + reg.objPointer[id]);
+            Debug.Log("[Jilwer] " + reg.objRegistry[reg.objPointer[id]]);
             // Object reference not set to an instance of an object
             return reg.objRegistry[reg.objPointer[id]];
         }

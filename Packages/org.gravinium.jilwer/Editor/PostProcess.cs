@@ -16,6 +16,8 @@ namespace Org.Gravinium.Jilwer.Editor
             Debug.Log("[Jilwer] Running post process functions...");
             ObjectRegistryPostProcess.CreateRegistryObject(JilwerObject);
             Debug.Log("[Jilwer] Post process functions complete!");
+
+            Debug.Log("[Jilwer] Post processing complete!");
         }
     }
 }
