@@ -10,7 +10,10 @@ namespace Org.Gravinium.Jilwer.Runtime.Core.Collections
 
         public static ObjectArrayList New(int size = 4)
         {
-            return TypeRegistry.Create(nameof(ObjectArrayList)).GetComponent<ObjectArrayList>();
+            var newList = TypeRegistry.Create(nameof(ObjectArrayList)).GetComponent<ObjectArrayList>();
+            newList._count = 0;
+            newList._items = new object[size];
+            return newList;
         }
 
         public int Length()
@@ -22,7 +25,9 @@ namespace Org.Gravinium.Jilwer.Runtime.Core.Collections
         {
             if (_count >= _items.Length)
             {
-                object[] newItems = new object[_count * 2];
+                int newSize = _items.Length > 0 ? _items.Length * 2 : 4;
+                object[] newItems = new object[newSize];
+
                 for (int i = 0; i < _count; i++)
                 {
                     newItems[i] = _items[i];

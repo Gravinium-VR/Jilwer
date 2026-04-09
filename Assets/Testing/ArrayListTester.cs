@@ -23,8 +23,8 @@ public class ArrayListTester : UdonSharpBehaviour
         string msg = "[";
         for (int i = 0; i < list.Length(); i++)
         {
-            msg += list.Get(i) + (list.Length() - 1 < i ? ", " : "]");
+            msg += list.Get(i) + (i < list.Length() - 1 ? ", " : "]");
         }
-        Debug.Log("[ArrayListTester] ");
+        Debug.Log("[ArrayListTester] " + msg);
     }
 }
