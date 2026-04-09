@@ -6,7 +6,9 @@
         "VRC.SDK3",
         "VRC.SDKBase",
         "VRC.Udon",
-        "UdonSharp.Editor"
+        "VRC.Udon.Editor",
+        "UdonSharp.Editor",
+        "UdonSharp.Runtime"
     ],
     "includePlatforms": [
         "Editor"

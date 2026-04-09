@@ -10,16 +10,7 @@ namespace Org.Gravinium.Jilwer.Runtime.Core.Collections
 
         public static ObjectArrayList New(int size = 4)
         {
-            GameObject result = ObjectRegistry.Get(ObjectRegistry.ObjectArrayList);
-            ObjectArrayList component = result.GetComponent<ObjectArrayList>();
-
-            if (component.GetType().ToString() != "ObjectArrayList")
-            {
-                Debug.LogError("[Jilwer] Component is an incorrect type");
-                return null;
-            }
-
-            return component;
+            return TypeRegistry.Create(nameof(ObjectArrayList)).GetComponent<ObjectArrayList>();
         }
 
         public int Length()
