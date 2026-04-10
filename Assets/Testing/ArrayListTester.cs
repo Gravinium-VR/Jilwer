@@ -3,16 +3,19 @@ using UnityEngine;
 using VRC.SDKBase;
 using VRC.Udon;
 using Org.Gravinium.Jilwer.Runtime.Core.Collections;
+using Org.Gravinium.Jilwer.Runtime.Core;
 
 [UdonBehaviourSyncMode(BehaviourSyncMode.None)]
 public class ArrayListTester : UdonSharpBehaviour
 {
+    public JilwerRuntime jilwer;
+
     private ObjectArrayList list;
     private int counter = 1;
 
     void Start()
     {
-        list = ObjectArrayList.New();
+        list = ObjectArrayList.New(jilwer);
     }
 
     public override void Interact()

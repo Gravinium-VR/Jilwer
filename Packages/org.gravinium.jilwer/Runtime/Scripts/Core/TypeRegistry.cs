@@ -12,15 +12,16 @@ namespace Org.Gravinium.Jilwer.Runtime.Core
         public GameObject parentContainer = null;
         public int id = 0;
 
-        public static GameObject Create(string key)
+        public static GameObject Create(JilwerRuntime runtime, string key)
         {
-            TypeRegistry reg = GameObject.Find("Jilwer__TypeRegistry").GetComponent<TypeRegistry>();
+            TypeRegistry reg = runtime.types;
 
             GameObject newObj = Instantiate(Get(reg, key));
             newObj.transform.parent = reg.parentContainer.transform;
             newObj.name = newObj.name.Replace("(Clone)", "").Trim();
             newObj.name += "_" + reg.id;
             reg.id++;
+
             return newObj;
         }
 

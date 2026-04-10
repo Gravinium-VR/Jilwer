@@ -8,12 +8,14 @@ namespace Org.Gravinium.Jilwer.Runtime.Core.Collections
         private int _count;
         private object[] _items;
 
-        public static ObjectArrayList New(int size = 4)
+        public static ObjectArrayList New(JilwerRuntime runtime, int size = 4)
         {
-            var newList = TypeRegistry.Create(nameof(ObjectArrayList)).GetComponent<ObjectArrayList>();
-            newList._count = 0;
-            newList._items = new object[size];
-            return newList;
+            var type = TypeRegistry.Create(runtime, nameof(ObjectArrayList)).GetComponent<ObjectArrayList>();
+
+            type._count = 0;
+            type._items = new object[size];
+
+            return type;
         }
 
         public int Length()

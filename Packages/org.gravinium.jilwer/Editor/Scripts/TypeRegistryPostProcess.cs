@@ -12,7 +12,7 @@ namespace Org.Gravinium.Jilwer.Editor
 {
     public class TypeRegistryPostProcess
     {
-        public static void CreateRegistryObjects(GameObject jilwerObject)
+        public static TypeRegistry CreateRegistryObjects(GameObject jilwerObject)
         {
             GameObject registryObject = new GameObject("Jilwer__TypeRegistry");
             registryObject.transform.parent = jilwerObject.transform;
@@ -45,25 +45,8 @@ namespace Org.Gravinium.Jilwer.Editor
 
             registryComponent.keys = keyList.ToArray();
             registryComponent.objects = objectList.ToArray();
-        }
 
-        private static UdonSharpProgramAsset GetTypeRegistryProgramSource()
-        {
-            string[] guids = AssetDatabase.FindAssets("t:UdonSharpProgramAsset TypeRegistry");
-            if (guids.Length == 0)
-                throw new Exception("Could not find TypeRegistry UdonSharpProgramAsset asset!");
-
-            foreach (string guid in guids)
-            {
-                string path = AssetDatabase.GUIDToAssetPath(guid);
-
-                if (path.StartsWith("Packages/org.gravinium.jilwer/", StringComparison.OrdinalIgnoreCase))
-                {
-                    return AssetDatabase.LoadAssetAtPath<UdonSharpProgramAsset>(path);
-                }
-            }
-
-            throw new Exception("Could not find TypeRegistry UdonProgramSource in Gravinium package!");
+            return registryComponent;
         }
 
         private static TypeRegistryAsset[] GetAllRegistries()
