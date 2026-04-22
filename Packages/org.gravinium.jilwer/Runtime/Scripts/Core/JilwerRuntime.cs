@@ -1,4 +1,4 @@
-using UdonSharp;
+﻿using UdonSharp;
 
 namespace Org.Gravinium.Jilwer.Runtime.Core
 {

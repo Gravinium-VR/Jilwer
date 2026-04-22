@@ -14,6 +14,12 @@ namespace Org.Gravinium.Jilwer.Runtime.Core
 
         public static GameObject Create(JilwerRuntime runtime, string key)
         {
+            if (!runtime)
+            {
+                Debug.LogError("[Jilwer] Runtime not set!");
+                return null;
+            }
+
             TypeRegistry reg = runtime.types;
 
             GameObject newObj = Instantiate(Get(reg, key));

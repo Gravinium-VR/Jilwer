@@ -10,7 +10,7 @@ namespace Org.Gravinium.Jilwer.Runtime.Core.Collections
 
         public static ObjectArrayList New(JilwerRuntime runtime, int size = 4)
         {
-            var type = TypeRegistry.Create(runtime, nameof(ObjectArrayList)).GetComponent<ObjectArrayList>();
+            ObjectArrayList type = TypeRegistry.Create(runtime, nameof(ObjectArrayList)).GetComponent<ObjectArrayList>();
 
             type._count = 0;
             type._items = new object[size];

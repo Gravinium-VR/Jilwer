@@ -18,7 +18,7 @@ namespace Org.Gravinium.Jilwer.Editor
             registryObject.transform.parent = jilwerObject.transform;
             TypeRegistry registryComponent = registryObject.AddUdonSharpComponent<TypeRegistry>();
 
-            GameObject typeObjectParent = new GameObject("Jilwer__RuntimeObjects");
+            GameObject typeObjectParent = new GameObject("Jilwer__TypeObjects");
             typeObjectParent.transform.parent = registryObject.transform;
             registryComponent.parentContainer = typeObjectParent;
 
