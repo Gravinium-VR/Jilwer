@@ -1,9 +1,7 @@
 ﻿using UdonSharp;
 using UnityEngine;
-using VRC.SDKBase;
-using VRC.Udon;
-using Gravinium.Jilwer.Core.Collections;
 using Gravinium.Jilwer.Core;
+using Gravinium.Jilwer.Core.Collections;
 
 [UdonBehaviourSyncMode(BehaviourSyncMode.None)]
 public class ArrayListTester : UdonSharpBehaviour
@@ -13,7 +11,7 @@ public class ArrayListTester : UdonSharpBehaviour
     private ObjectArrayList _list;
     private int _counter = 1;
 
-    void Start()
+    private void Start()
     {
         _list = ObjectArrayList.New(jilwer);
     }
