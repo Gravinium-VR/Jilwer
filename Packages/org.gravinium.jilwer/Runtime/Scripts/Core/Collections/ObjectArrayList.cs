@@ -1,7 +1,7 @@
 ﻿using UdonSharp;
 using UnityEngine;
 
-namespace Org.Gravinium.Jilwer.Runtime.Core.Collections
+namespace Gravinium.Jilwer.Core.Collections
 {
     public class ObjectArrayList : UdonSharpBehaviour
     {
@@ -10,7 +10,7 @@ namespace Org.Gravinium.Jilwer.Runtime.Core.Collections
 
         public static ObjectArrayList New(JilwerRuntime runtime, int size = 4)
         {
-            ObjectArrayList type = TypeRegistry.Create(runtime, nameof(ObjectArrayList)).GetComponent<ObjectArrayList>();
+            var type = TypeRegistry.Create(runtime, nameof(ObjectArrayList)).GetComponent<ObjectArrayList>();
 
             type._count = 0;
             type._items = new object[size];

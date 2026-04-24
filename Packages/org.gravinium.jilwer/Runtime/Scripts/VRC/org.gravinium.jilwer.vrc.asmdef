@@ -1,7 +1,8 @@
 {
     "name": "org.gravinium.jilwer.vrc",
+    "rootNamespace": "",
     "references": [
-        "org.gravinium.jilwer.core"
+        "Gravinium.Jilwer.Core"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

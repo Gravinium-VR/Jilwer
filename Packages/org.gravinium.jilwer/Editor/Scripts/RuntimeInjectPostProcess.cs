@@ -1,18 +1,17 @@
 using System.Reflection;
-using Org.Gravinium.Jilwer.Runtime.Core;
+using Gravinium.Jilwer.Core;
 using UdonSharp;
 using UdonSharpEditor;
 using UnityEngine;
 
-namespace Org.Gravinium.Jilwer.Editor
+namespace Gravinium.Jilwer.Editor
 {
-    public class RuntimeInjectPostProcess
+    public static class RuntimeInjectPostProcess
     {
-        public static void InjectRuntime(GameObject JilwerObject, TypeRegistry registry)
+        public static void InjectRuntime(GameObject jilwerObject, TypeRegistry registry)
         {
             Debug.Log("[Jilwer] Creating runtime");
-            GameObject runtimeObj = new GameObject("Jilwer__Runtime");
-            runtimeObj.transform.parent = JilwerObject.transform;
+            GameObject runtimeObj = new GameObject("Jilwer__Runtime") { transform = { parent = jilwerObject.transform } };
 
             JilwerRuntime runtimeScript = runtimeObj.AddUdonSharpComponent<JilwerRuntime>();
             runtimeScript.types = registry;

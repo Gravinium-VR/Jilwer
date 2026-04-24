@@ -1,8 +1,8 @@
-using Org.Gravinium.Jilwer.Runtime.Core;
+using Gravinium.Jilwer.Core;
 using UnityEditor.Callbacks;
 using UnityEngine;
 
-namespace Org.Gravinium.Jilwer.Editor
+namespace Gravinium.Jilwer.Editor
 {
     public class PostProcess : MonoBehaviour
     {

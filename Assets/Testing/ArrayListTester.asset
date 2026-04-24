@@ -62,7 +62,7 @@ MonoBehaviour:
       Data: 3|System.RuntimeType, mscorlib
     - Name: 
       Entry: 1
-      Data: Org.Gravinium.Jilwer.Runtime.Core.JilwerRuntime, org.gravinium.jilwer.core
+      Data: Gravinium.Jilwer.Core.JilwerRuntime, org.gravinium.jilwer.core
     - Name: 
       Entry: 8
       Data: 
@@ -110,19 +110,19 @@ MonoBehaviour:
       Data: 
     - Name: $k
       Entry: 1
-      Data: list
+      Data: _list
     - Name: $v
       Entry: 7
       Data: 6|UdonSharp.Compiler.FieldDefinition, UdonSharp.Editor
     - Name: <Name>k__BackingField
       Entry: 1
-      Data: list
+      Data: _list
     - Name: <UserType>k__BackingField
       Entry: 7
       Data: 7|System.RuntimeType, mscorlib
     - Name: 
       Entry: 1
-      Data: Org.Gravinium.Jilwer.Runtime.Core.Collections.ObjectArrayList, org.gravinium.jilwer.core
+      Data: Gravinium.Jilwer.Core.Collections.ObjectArrayList, org.gravinium.jilwer.core
     - Name: 
       Entry: 8
       Data: 
@@ -164,13 +164,13 @@ MonoBehaviour:
       Data: 
     - Name: $k
       Entry: 1
-      Data: counter
+      Data: _counter
     - Name: $v
       Entry: 7
       Data: 9|UdonSharp.Compiler.FieldDefinition, UdonSharp.Editor
     - Name: <Name>k__BackingField
       Entry: 1
-      Data: counter
+      Data: _counter
     - Name: <UserType>k__BackingField
       Entry: 7
       Data: 10|System.RuntimeType, mscorlib

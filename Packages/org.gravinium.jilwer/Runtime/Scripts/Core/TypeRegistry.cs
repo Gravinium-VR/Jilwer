@@ -1,16 +1,15 @@
-﻿using UdonSharp;
+﻿using System;
+using UdonSharp;
 using UnityEngine;
-using VRC.SDKBase;
-using VRC.Udon;
 
-namespace Org.Gravinium.Jilwer.Runtime.Core
+namespace Gravinium.Jilwer.Core
 {
     public class TypeRegistry : UdonSharpBehaviour
     {
-        public string[] keys = new string[0];
-        public GameObject[] objects = new GameObject[0];
-        public GameObject parentContainer = null;
-        public int id = 0;
+        public string[] keys = Array.Empty<string>();
+        public GameObject[] objects = Array.Empty<GameObject>();
+        public GameObject parentContainer;
+        public int id;
 
         public static GameObject Create(JilwerRuntime runtime, string key)
         {
@@ -22,11 +21,8 @@ namespace Org.Gravinium.Jilwer.Runtime.Core
 
             TypeRegistry reg = runtime.types;
 
-            GameObject newObj = Instantiate(Get(reg, key));
-            newObj.transform.parent = reg.parentContainer.transform;
-            newObj.name = newObj.name.Replace("(Clone)", "").Trim();
-            newObj.name += "_" + reg.id;
-            reg.id++;
+            GameObject newObj = Instantiate(Get(reg, key), reg.parentContainer.transform);
+            newObj.name = newObj.name.Replace("(Clone)", "_" + reg.id++).Trim();
 
             return newObj;
         }

@@ -1,16 +1,13 @@
-using System;
 using System.Collections.Generic;
-using Org.Gravinium.Jilwer.Runtime.Core;
-using UdonSharp;
+using Gravinium.Jilwer.Core;
 using UdonSharpEditor;
 using UnityEditor;
 using UnityEngine;
-using VRC.SDKBase;
-using VRC.Udon;
 
-namespace Org.Gravinium.Jilwer.Editor
+
+namespace Gravinium.Jilwer.Editor
 {
-    public class TypeRegistryPostProcess
+    public static class TypeRegistryPostProcess
     {
         public static TypeRegistry CreateRegistryObjects(GameObject jilwerObject)
         {

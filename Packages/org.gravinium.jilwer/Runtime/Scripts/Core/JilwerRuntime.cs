@@ -1,6 +1,6 @@
 ﻿using UdonSharp;
 
-namespace Org.Gravinium.Jilwer.Runtime.Core
+namespace Gravinium.Jilwer.Core
 {
     public class JilwerRuntime : UdonSharpBehaviour
     {

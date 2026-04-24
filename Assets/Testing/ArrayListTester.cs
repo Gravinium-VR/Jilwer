@@ -2,31 +2,31 @@
 using UnityEngine;
 using VRC.SDKBase;
 using VRC.Udon;
-using Org.Gravinium.Jilwer.Runtime.Core.Collections;
-using Org.Gravinium.Jilwer.Runtime.Core;
+using Gravinium.Jilwer.Core.Collections;
+using Gravinium.Jilwer.Core;
 
 [UdonBehaviourSyncMode(BehaviourSyncMode.None)]
 public class ArrayListTester : UdonSharpBehaviour
 {
     public JilwerRuntime jilwer;
 
-    private ObjectArrayList list;
-    private int counter = 1;
+    private ObjectArrayList _list;
+    private int _counter = 1;
 
     void Start()
     {
-        list = ObjectArrayList.New(jilwer);
+        _list = ObjectArrayList.New(jilwer);
     }
 
     public override void Interact()
     {
-        list.Add(counter);
-        counter++;
+        _list.Add(_counter);
+        _counter++;
 
         string msg = "[";
-        for (int i = 0; i < list.Length(); i++)
+        for (int i = 0; i < _list.Length(); i++)
         {
-            msg += list.Get(i) + (i < list.Length() - 1 ? ", " : "]");
+            msg += _list.Get(i) + (i < _list.Length() - 1 ? ", " : "]");
         }
         Debug.Log("[ArrayListTester] " + msg);
     }

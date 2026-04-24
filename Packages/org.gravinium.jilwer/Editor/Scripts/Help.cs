@@ -1,6 +1,6 @@
 ﻿using UnityEditor;
 
-namespace Org.Gravinium.Jilwer.Editor
+namespace Gravinium.Jilwer.Editor
 {
     public static class Help
     {

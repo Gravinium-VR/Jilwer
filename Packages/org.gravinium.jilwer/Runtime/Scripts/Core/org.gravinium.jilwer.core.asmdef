@@ -1,5 +1,6 @@
 {
     "name": "org.gravinium.jilwer.core",
+    "rootNamespace": "",
     "references": [
         "VRC.SDK3",
         "VRC.SDKBase",
