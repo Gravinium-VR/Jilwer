@@ -1,6 +1,6 @@
 # Jilwer
 
-Jilwer (jill-wear) is a collection of useful UdonSharp systems for VRChat world development.
+Jilwer (jill-wear) is a toolkit that extends UdonSharp with additional runtime capabilities,
+reusable systems, and utility functions for VRChat world and tooling development.
 
-> [!CAUTION]
-> Jilwer is in active development (`0.x`), systems may change without warning. The API will stabilize at `1.0.0` along with documentation to back it.
+Documentation: https://docs.gravinium.org/projects/jilwer
