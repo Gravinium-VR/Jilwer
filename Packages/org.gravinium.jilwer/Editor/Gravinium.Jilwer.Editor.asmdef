@@ -1,8 +1,8 @@
 {
-    "name": "org.gravinium.jilwer.editor",
+    "name": "Gravinium.Jilwer.Editor",
     "references": [
-        "org.gravinium.jilwer.core",
-        "org.gravinium.jilwer.vrc",
+        "Gravinium.Jilwer.Core",
+        "Gravinium.Jilwer.VRC",
         "VRC.SDK3",
         "VRC.SDKBase",
         "VRC.Udon",

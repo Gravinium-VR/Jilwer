@@ -1,11 +1,8 @@
 {
-    "name": "org.gravinium.jilwer.core",
+    "name": "Gravinium.Jilwer.VRC",
     "rootNamespace": "",
     "references": [
-        "VRC.SDK3",
-        "VRC.SDKBase",
-        "VRC.Udon",
-        "UdonSharp.Runtime"
+        "Gravinium.Jilwer.Core"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],
