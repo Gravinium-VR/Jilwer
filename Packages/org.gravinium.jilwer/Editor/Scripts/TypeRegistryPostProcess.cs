@@ -1,5 +1,9 @@
+using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
 using Gravinium.Jilwer.Core;
+using UdonSharp;
 using UdonSharpEditor;
 using UnityEditor;
 using UnityEngine;
@@ -11,33 +15,30 @@ namespace Gravinium.Jilwer.Editor
     {
         public static TypeRegistry CreateRegistryObjects(GameObject jilwerObject)
         {
-            GameObject registryObject = new GameObject("Jilwer__TypeRegistry");
-            registryObject.transform.parent = jilwerObject.transform;
+            GameObject registryObject = new GameObject("Jilwer__TypeRegistry")
+                { transform = { parent = jilwerObject.transform } };
             TypeRegistry registryComponent = registryObject.AddUdonSharpComponent<TypeRegistry>();
 
-            GameObject typeObjectParent = new GameObject("Jilwer__TypeObjects");
-            typeObjectParent.transform.parent = registryObject.transform;
+            GameObject typeObjectParent = new GameObject("Jilwer__TypeObjects") 
+                { transform = { parent = registryObject.transform } };
             registryComponent.parentContainer = typeObjectParent;
 
-            TypeRegistryAsset[] registries = GetAllRegistries();
+            var registries = GetAllRegistries();
 
-            List<string> keyList = new List<string>();
-            List<GameObject> objectList = new List<GameObject>();
+            var keyList = new List<string>();
+            var objectList = new List<GameObject>();
 
             foreach (var reg in registries)
             {
-                foreach (var script in reg.scripts)
-                {
-                    string name = script.GetClass().Name;
-                    keyList.Add(name);
+                string name = reg.Name;
+                keyList.Add(name);
 
-                    GameObject typeObject = new GameObject($"Jilwer__Type_{name}");
-                    typeObject.transform.parent = registryObject.transform;
+                GameObject typeObject = new GameObject($"Jilwer__Type_{name}")
+                    { transform = { parent = registryObject.transform } };
 
-                    typeObject.AddUdonSharpComponent(script.GetClass());
+                typeObject.AddUdonSharpComponent(reg);
 
-                    objectList.Add(typeObject);
-                }
+                objectList.Add(typeObject);
             }
 
             registryComponent.keys = keyList.ToArray();
@@ -46,21 +47,24 @@ namespace Gravinium.Jilwer.Editor
             return registryComponent;
         }
 
-        private static TypeRegistryAsset[] GetAllRegistries()
+        private static Type[] GetAllRegistries()
         {
-            string[] guids = AssetDatabase.FindAssets("t:TypeRegistryAsset");
-
-            TypeRegistryAsset[] registries = new TypeRegistryAsset[guids.Length];
-
-            for (int i = 0; i < guids.Length; i++)
-            {
-                string path = AssetDatabase.GUIDToAssetPath(guids[i]);
-                registries[i] = AssetDatabase.LoadAssetAtPath<TypeRegistryAsset>(path);
-            }
-
-            return registries;
+            return AppDomain.CurrentDomain.GetAssemblies()
+                .SelectMany(a =>
+                {
+                    try
+                    {
+                        return a.GetTypes();
+                    }
+                    catch (ReflectionTypeLoadException e)
+                    {
+                        return e.Types.Where(t => t != null);
+                    }
+                }).Where(t =>
+                    typeof(UdonSharpBehaviour).IsAssignableFrom(t) && !t.IsAbstract &&
+                    t.GetCustomAttribute<JilwerType>() != null).ToArray();
         }
-
+        
     }
 
 }

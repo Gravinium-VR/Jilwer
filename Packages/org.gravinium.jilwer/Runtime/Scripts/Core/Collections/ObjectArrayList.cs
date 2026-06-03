@@ -3,6 +3,7 @@ using UnityEngine;
 
 namespace Gravinium.Jilwer.Core.Collections
 {
+    [JilwerType]
     public class ObjectArrayList : UdonSharpBehaviour
     {
         private int _count;
