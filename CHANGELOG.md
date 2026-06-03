@@ -10,6 +10,16 @@ should make development a bit easier and is a better general pattern Jilwer will
 ### Added
 
 - Jilwer Type Attribute
+- Help buttons (Gravinium/Jilwer/Help/*)
+- Error enum
+
+### Changed
+
+- Swapped asmdef from old `org.gravinium.jilwer` to new `Gravinium.Jilwer`.
+- Changed UdonSharp asmdef to match above change.
+- Renamed ObjectArrayList to ArrayList
+- Changed return types in `ArrayList` (now using Error enum)
+- Renamed `ArrayList.Get` to `ArrayList.TryGet`
 
 ### Removed
 
@@ -19,4 +29,4 @@ should make development a bit easier and is a better general pattern Jilwer will
 
 ### Added
 - Type Registry
-- More that I didn't track cause uhhh, yeah. Init version
+- Init version

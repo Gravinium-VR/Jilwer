@@ -62,7 +62,7 @@ MonoBehaviour:
       Data: 3|System.RuntimeType, mscorlib
     - Name: 
       Entry: 1
-      Data: Gravinium.Jilwer.Core.TypeRegistry, org.gravinium.jilwer.core
+      Data: Gravinium.Jilwer.Core.TypeRegistry, Gravinium.Jilwer.Core
     - Name: 
       Entry: 8
       Data: 

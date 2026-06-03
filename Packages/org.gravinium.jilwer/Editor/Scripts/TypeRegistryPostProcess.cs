@@ -48,6 +48,8 @@ namespace Gravinium.Jilwer.Editor
 
         private static Type[] GetAllRegistries()
         {
+            // AI: I have zero clue how this works. I'll eventually get to rewriting this on my own, but until then,
+            // this comment will remain here. (Please give me Rust iterators T-T)
             return AppDomain.CurrentDomain.GetAssemblies()
                 .SelectMany(a =>
                 {
