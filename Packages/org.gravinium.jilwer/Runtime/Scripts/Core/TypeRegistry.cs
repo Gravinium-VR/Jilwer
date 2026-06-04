@@ -6,6 +6,7 @@ namespace Gravinium.Jilwer.Core
 {
     public class TypeRegistry : UdonSharpBehaviour
     {
+        // TODO: Do these need to be public?
         public string[] keys = Array.Empty<string>();
         public GameObject[] objects = Array.Empty<GameObject>();
         public GameObject parentContainer;

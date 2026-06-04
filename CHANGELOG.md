@@ -4,8 +4,11 @@
 
 ### Notes
 
-- The TypeRegistry now uses an attribute (`JilwerType`) instead of the scriptable object (`TypeRegistryAsset`). This
-should make development a bit easier and is a better general pattern Jilwer will now follow for future systems.
+- The TypeRegistry now uses an attribute (`JilwerType`) instead of the
+scriptable object (`TypeRegistryAsset`). This should make development a bit
+easier and is a better general pattern Jilwer will now follow for future systems.
+- Jilwer will use its custom Error enum for its API, and the general pattern
+can be used for your own stuff using the Jilwer Error enum.
 
 ### Added
 
@@ -19,7 +22,9 @@ should make development a bit easier and is a better general pattern Jilwer will
 - Changed UdonSharp asmdef to match above change.
 - Renamed ObjectArrayList to ArrayList
 - Changed return types in `ArrayList` (now using Error enum)
+- Renamed `ArrayList.Add` to `ArrayList.TryAdd`
 - Renamed `ArrayList.Get` to `ArrayList.TryGet`
+- Renamed `ArrayList.Remove` to `ArrayList.TryRemove`
 
 ### Removed
 

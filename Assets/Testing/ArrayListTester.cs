@@ -18,7 +18,7 @@ public class ArrayListTester : UdonSharpBehaviour
 
     public override void Interact()
     {
-        _list.Add(_counter);
+        _list.TryAdd(_counter);
         _counter++;
 
         string msg = "[";

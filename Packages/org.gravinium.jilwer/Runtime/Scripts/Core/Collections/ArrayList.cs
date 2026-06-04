@@ -46,7 +46,7 @@ namespace Gravinium.Jilwer.Core.Collections
             Expand();
         }
 
-        public Error Add(object item)
+        public Error TryAdd(object item)
         {
             if (_type == null)
             {
@@ -61,7 +61,6 @@ namespace Gravinium.Jilwer.Core.Collections
             if (_length >= _capacity)
             {
                 // Maybe have a system for setting the "resize factor" (new += old * factor)
-                //int newSize = _items.Length > 0 ? _items.Length * 2 : DefaultCapacity;
                 if (_capacity < 2)
                 {
                     _capacity = 2;
@@ -92,11 +91,11 @@ namespace Gravinium.Jilwer.Core.Collections
             return Error.None;
         }
 
-        public object Remove(int index)
+        public Error TryRemove(int index)
         {
             if (index < 0 || index >= _length)
             {
-                return null;
+                return Error.IndexOutOfBounds;
             }
 
             for (int i = index; i < _length - 1; i++)
@@ -107,7 +106,7 @@ namespace Gravinium.Jilwer.Core.Collections
             var removedObj = _items[_length - 1];
             _items[_length - 1] = null;
             _length--;
-            return removedObj;
+            return Error.None;
         }
         
         /* Private */
