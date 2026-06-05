@@ -1,33 +1,36 @@
-﻿using System;
-using JetBrains.Annotations;
-using UdonSharp;
+﻿using UdonSharp;
 using UnityEngine;
 
 namespace Gravinium.Jilwer.Core.Collections
 {
     [JilwerType]
+    [UdonBehaviourSyncMode(BehaviourSyncMode.None)]
     public class ArrayList : UdonSharpBehaviour
     {
         private const int DefaultCapacity = 10;
         
         private int _length;
         private int _capacity;
-        private Type _type;
         
         private object[] _items;
         
         /* Public */
-        public static ArrayList New(JilwerRuntime runtime, int size = DefaultCapacity)
+        public static Error New(JilwerRuntime runtime, out ArrayList value, int size = DefaultCapacity)
         {
-            // Use Jilwer TypeRegistry to create the component
-            var type = TypeRegistry.Create(runtime, nameof(ArrayList)).GetComponent<ArrayList>();
+            var err = TypeRegistry.Create(runtime, nameof(ArrayList), out GameObject obj);
+            if (err != Error.None) {
+                value = null;
+                return err;
+            };
+            
+            var type = obj.GetComponent<ArrayList>();
 
             type._length = 0;
             type._capacity = size;
-            type._type = null;
             type._items = new object[size];
 
-            return type;
+            value = type;
+            return Error.None;
         }
 
         public int Length()
@@ -46,17 +49,8 @@ namespace Gravinium.Jilwer.Core.Collections
             Expand();
         }
 
-        public Error TryAdd(object item)
+        public Error Add(object item)
         {
-            if (_type == null)
-            {
-                _type = item.GetType();
-            }
-            else if (_type != item.GetType())
-            {
-                return Error.InvalidType;
-            }
-            
             // If the length is equal or greater than the current capacity, we must resize to fit another item
             if (_length >= _capacity)
             {
@@ -79,7 +73,7 @@ namespace Gravinium.Jilwer.Core.Collections
             return Error.None;
         }
         
-        public Error TryGet(int index, out object item)
+        public Error Get(int index, out object item)
         {
             if (index < 0 || index >= _length)
             {
@@ -91,7 +85,7 @@ namespace Gravinium.Jilwer.Core.Collections
             return Error.None;
         }
 
-        public Error TryRemove(int index)
+        public Error Remove(int index)
         {
             if (index < 0 || index >= _length)
             {
@@ -103,7 +97,6 @@ namespace Gravinium.Jilwer.Core.Collections
                 _items[i] = _items[i + 1];
             }
 
-            var removedObj = _items[_length - 1];
             _items[_length - 1] = null;
             _length--;
             return Error.None;

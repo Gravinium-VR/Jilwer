@@ -14,7 +14,7 @@ namespace Gravinium.Jilwer.Editor
             GameObject runtimeObj = new GameObject("Jilwer__Runtime") { transform = { parent = jilwerObject.transform } };
 
             JilwerRuntime runtimeScript = runtimeObj.AddUdonSharpComponent<JilwerRuntime>();
-            runtimeScript.types = registry;
+            runtimeScript.typeRegistry = registry;
 
             var allComponents = Object.FindObjectsOfType<UdonSharpBehaviour>(true);
             foreach (var component in allComponents)

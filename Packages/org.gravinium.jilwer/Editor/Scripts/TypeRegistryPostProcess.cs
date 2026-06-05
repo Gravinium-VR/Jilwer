@@ -24,24 +24,15 @@ namespace Gravinium.Jilwer.Editor
 
             var registries = GetAllRegistries();
 
-            var keyList = new List<string>();
-            var objectList = new List<GameObject>();
-
             foreach (var reg in registries)
             {
                 string name = reg.Name;
-                keyList.Add(name);
-
                 GameObject typeObject = new GameObject($"Jilwer__Type_{name}")
                     { transform = { parent = registryObject.transform } };
-
                 typeObject.AddUdonSharpComponent(reg);
 
-                objectList.Add(typeObject);
+                registryComponent.objects.Add(name, typeObject);
             }
-
-            registryComponent.keys = keyList.ToArray();
-            registryComponent.objects = objectList.ToArray();
 
             return registryComponent;
         }

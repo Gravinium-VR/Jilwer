@@ -18,6 +18,13 @@ interactions between UdonSharp and the Jilwer API... this means it creates
 quite a few game objects during build time and runtime as a way to maintain
 state and perform actions typically restricted by UdonSharp.
 
+## TODO
+
+- Get a project board up on GitHub or something.
+- Swap Type Registry to use a Dictionary instead of doing a linear search.
+  - Even better is to have types get ids during builds that are used for
+  O(1) lookup.
+
 ## AI Usage
 
 I'm generally against most AI generated code, especially code that ends up in

@@ -21,10 +21,8 @@ can be used for your own stuff using the Jilwer Error enum.
 - Swapped asmdef from old `org.gravinium.jilwer` to new `Gravinium.Jilwer`.
 - Changed UdonSharp asmdef to match above change.
 - Renamed ObjectArrayList to ArrayList
-- Changed return types in `ArrayList` (now using Error enum)
-- Renamed `ArrayList.Add` to `ArrayList.TryAdd`
-- Renamed `ArrayList.Get` to `ArrayList.TryGet`
-- Renamed `ArrayList.Remove` to `ArrayList.TryRemove`
+- Changed everything to use the new Error pattern.
+- Type Registry now stores information in a dictionary.
 
 ### Removed
 

@@ -13,18 +13,23 @@ public class ArrayListTester : UdonSharpBehaviour
 
     private void Start()
     {
-        _list = ArrayList.New(jilwer);
+        var err = ArrayList.New(jilwer, out _list);
+        if (err != Error.None)
+        {
+            Debug.LogError($"Failed to create ArrayList! Error: 0x{err:X2}");
+            Destroy(this);
+        }
     }
 
     public override void Interact()
     {
-        _list.TryAdd(_counter);
+        _list.Add(_counter);
         _counter++;
 
         string msg = "[";
         for (int i = 0; i < _list.Length(); i++)
         {
-            if (_list.TryGet(i, out object num) != Error.None) { return; }
+            if (_list.Get(i, out object num) != Error.None) return;
             msg += num + (i < _list.Length() - 1 ? ", " : "]");
         }
         Debug.Log("[ArrayListTester] " + msg);

@@ -1,45 +1,51 @@
 ﻿using System;
 using UdonSharp;
 using UnityEngine;
+using UnityEngine.Serialization;
+using VRC.SDK3.Data;
 
 namespace Gravinium.Jilwer.Core
 {
+    [UdonBehaviourSyncMode(BehaviourSyncMode.None)]
     public class TypeRegistry : UdonSharpBehaviour
     {
-        // TODO: Do these need to be public?
-        public string[] keys = Array.Empty<string>();
-        public GameObject[] objects = Array.Empty<GameObject>();
+        public DataDictionary objects = new DataDictionary();
         public GameObject parentContainer;
         public int id;
 
-        public static GameObject Create(JilwerRuntime runtime, string key)
+        public static Error Create(JilwerRuntime runtime, string key, out GameObject newObj)
         {
             if (!runtime)
             {
-                Debug.LogError("[Jilwer] Runtime not set!");
-                return null;
+                newObj = null;
+                return Error.RuntimeDoesNotExist;
             }
 
-            TypeRegistry reg = runtime.types;
+            TypeRegistry reg = runtime.typeRegistry;
 
-            GameObject newObj = Instantiate(Get(reg, key), reg.parentContainer.transform);
+            var err = Get(reg, key, out GameObject refObj);
+            if (err != Error.None)
+            {
+                newObj = null;
+                return err;
+            }
+            
+            newObj = Instantiate(refObj, reg.parentContainer.transform);
             newObj.name = newObj.name.Replace("(Clone)", "_" + reg.id++).Trim();
-
-            return newObj;
+            
+            return Error.None;
         }
 
-        private static GameObject Get(TypeRegistry reg, string key)
+        private static Error Get(TypeRegistry reg, string key, out GameObject obj)
         {
-            int len = reg.keys.Length;
-            for (int i = 0; i < len; i++)
+            if (!reg.objects.TryGetValue(key, out DataToken objToken))
             {
-                if (!reg.keys[i].Equals(key)) continue;
-
-                return reg.objects[i];
+                obj = null;
+                return Error.KeyValueNotFound;
             }
 
-            Debug.LogError("[Jilwer] Could not find key in TypeRegistry");
-            return null;
+            obj = (GameObject) objToken.Reference;
+            return Error.None;
         }
 
     }
