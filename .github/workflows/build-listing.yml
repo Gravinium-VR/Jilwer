@@ -76,3 +76,14 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
+
+      # Run vpm-registry build
+      - name: Trigger VPM Registry Build
+        run: |
+          curl -sS \
+            -X POST \
+            -H "Accept: application/vnd.github+json" \
+            -H "Content-Type: application/json" \
+            -H "Authorization: Bearer ${{ secrets.REGISTRY_TOKEN }}" \
+            https://api.github.com/repos/Gravinium-VR/vpm-registry/dispatches \
+            -d '{"event_type":"package_released"}'
