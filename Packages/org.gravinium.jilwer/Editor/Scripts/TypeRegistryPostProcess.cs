@@ -29,6 +29,7 @@ namespace Gravinium.Jilwer.Editor
                 string name = reg.Name;
                 GameObject typeObject = new GameObject($"Jilwer__Type_{name}")
                     { transform = { parent = registryObject.transform } };
+                typeObject.SetActive(false);
                 typeObject.AddUdonSharpComponent(reg);
 
                 registryComponent.objects.Add(name, typeObject);

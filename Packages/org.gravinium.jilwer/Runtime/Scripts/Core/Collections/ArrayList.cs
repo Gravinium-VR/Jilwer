@@ -49,7 +49,7 @@ namespace Gravinium.Jilwer.Core.Collections
             Expand();
         }
 
-        public Error Add(object item)
+        public void Add(object item)
         {
             // If the length is equal or greater than the current capacity, we must resize to fit another item
             if (_length >= _capacity)
@@ -70,7 +70,6 @@ namespace Gravinium.Jilwer.Core.Collections
             // Add to the end of the array
             _items[_length] = item;
             _length++;
-            return Error.None;
         }
         
         public Error Get(int index, out object item)

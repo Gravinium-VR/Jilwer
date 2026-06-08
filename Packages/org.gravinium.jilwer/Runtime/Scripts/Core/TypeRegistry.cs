@@ -32,6 +32,7 @@ namespace Gravinium.Jilwer.Core
             
             newObj = Instantiate(refObj, reg.parentContainer.transform);
             newObj.name = newObj.name.Replace("(Clone)", "_" + reg.id++).Trim();
+            newObj.SetActive(true);
             
             return Error.None;
         }

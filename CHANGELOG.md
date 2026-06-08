@@ -1,6 +1,6 @@
 ﻿# Changelog
 
-## [0.2.0] - TBD
+## [0.2.0] - 2026-06-05
 
 ### Notes
 
@@ -23,6 +23,7 @@ can be used for your own stuff using the Jilwer Error enum.
 - Renamed ObjectArrayList to ArrayList
 - Changed everything to use the new Error pattern.
 - Type Registry now stores information in a dictionary.
+- Type Registry objects now start disabled.
 
 ### Removed
 
