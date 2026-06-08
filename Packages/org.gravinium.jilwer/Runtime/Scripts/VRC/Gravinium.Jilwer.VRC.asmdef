@@ -2,7 +2,7 @@
     "name": "Gravinium.Jilwer.VRC",
     "rootNamespace": "",
     "references": [
-        "Gravinium.Jilwer.Core"
+        "GUID:6911f9981aabd5c4b9a29d176bea9b95"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],
