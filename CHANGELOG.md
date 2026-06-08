@@ -4,9 +4,14 @@
 
 ### Notes
 
+- `Gravinium.Jilwer.Core.Collections` is now `Gravinium.Jilwer.Collections`
+
 ### Added
 
 ### Changed
+
+- `Gravinium.Jilwer.Core.Collections` is now moved one level up and has its own
+   asmdef to work with.
 
 ### Removed
 
