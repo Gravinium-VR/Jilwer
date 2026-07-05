@@ -1,6 +1,6 @@
 ﻿# Changelog
 
-## [0.3.0] - TBD
+## [0.3.0](https://github.com/Gravinium-VR/Jilwer/releases/tag/0.3.0) - 2026-07-05
 
 ### Notes
 
