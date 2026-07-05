@@ -1,7 +1,8 @@
 ﻿using UdonSharp;
 using UnityEngine;
+using Gravinium.Jilwer.Core;
 
-namespace Gravinium.Jilwer.Core.Collections
+namespace Gravinium.Jilwer.Collections
 {
     [JilwerType]
     [UdonBehaviourSyncMode(BehaviourSyncMode.None)]

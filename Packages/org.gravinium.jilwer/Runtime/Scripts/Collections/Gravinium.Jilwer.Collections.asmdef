@@ -1,7 +1,8 @@
 {
-    "name": "Gravinium.Jilwer.Core",
+    "name": "Gravinium.Jilwer.Collections",
     "rootNamespace": "",
     "references": [
+        "GUID:6911f9981aabd5c4b9a29d176bea9b95",
         "GUID:6490804aa441dfe4b88eb56cccbdf081",
         "GUID:3456780c4fb2d324ab9c633d6f1b0ddb",
         "GUID:3c1bc1267eab5884ebe7f232c09ee0d9",

@@ -1,6 +1,22 @@
 ﻿# Changelog
 
-## [0.2.0] - 2026-06-05
+## [0.3.0](https://github.com/Gravinium-VR/Jilwer/releases/tag/0.3.0) - 2026-07-05
+
+### Notes
+
+- `Gravinium.Jilwer.Core.Collections` is now `Gravinium.Jilwer.Collections`
+
+### Added
+
+### Changed
+
+- `Gravinium.Jilwer.Core.Collections` is now moved one level up and has its own
+   asmdef to work with.
+- Help menu now lives under Tools submenu.
+
+### Removed
+
+## [0.2.0](https://github.com/Gravinium-VR/Jilwer/releases/tag/0.2.0) - 2026-06-05
 
 ### Notes
 
@@ -29,7 +45,7 @@ can be used for your own stuff using the Jilwer Error enum.
 
 - Type Registry Asset
 
-## [0.1.0] - 2026-04-27
+## [0.1.0](https://github.com/Gravinium-VR/Jilwer/releases/tag/0.1.0) - 2026-04-27
 
 ### Added
 - Type Registry

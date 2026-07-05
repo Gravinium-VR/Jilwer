@@ -1,7 +1,7 @@
 ﻿using UdonSharp;
 using UnityEngine;
 using Gravinium.Jilwer.Core;
-using Gravinium.Jilwer.Core.Collections;
+using Gravinium.Jilwer.Collections;
 
 [UdonBehaviourSyncMode(BehaviourSyncMode.None)]
 public class ArrayListTester : UdonSharpBehaviour
