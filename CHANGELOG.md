@@ -12,6 +12,7 @@
 
 - `Gravinium.Jilwer.Core.Collections` is now moved one level up and has its own
    asmdef to work with.
+- Help menu now lives under Tools submenu.
 
 ### Removed
 
