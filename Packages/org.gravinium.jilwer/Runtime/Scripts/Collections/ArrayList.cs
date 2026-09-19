@@ -1,7 +1,6 @@
 ﻿using UdonSharp;
 using UnityEngine;
 using Gravinium.Jilwer.Core;
-using UnityEngine.PlayerLoop;
 
 namespace Gravinium.Jilwer.Collections
 {
@@ -11,7 +10,7 @@ namespace Gravinium.Jilwer.Collections
     {
         private const int DefaultCapacity = 10;
         
-        private int _length;
+        private int _length = 0;
         private int _capacity;
         private float _resizePercentFactor = 0.5f;
         
@@ -28,12 +27,18 @@ namespace Gravinium.Jilwer.Collections
             
             var type = obj.GetComponent<ArrayList>();
 
-            type._length = 0;
             type._capacity = size;
             type._items = new object[size];
 
             value = type;
             return Error.None;
+        }
+
+        public void SetResizePercentFactor(float factor)
+        {
+            if (factor <= 0) factor = 0.01f;
+            
+            _resizePercentFactor = factor;
         }
 
         public int Length()
@@ -69,7 +74,6 @@ namespace Gravinium.Jilwer.Collections
             }
             
             UpdateCapacity();
-            
             ShiftAllRightStartingAt(index);
             _items[index] = item;
 

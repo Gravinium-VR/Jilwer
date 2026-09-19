@@ -4,13 +4,15 @@
 
 ### Notes
 
-- Started the implementation of the event system.
+- Started the implementation of the event system. Nothing will be done with it
+as of now.
 
 ### Added
 
-- ArrayList
+- ArrayList Methods
   - `Array` - Returns the internal array.
   - `Insert` - Adds an item to the specified index.
+  - `SetResizePercentFactor` - Changes resize factor, default 0.5 (50% inc)
 
 ### Changed
 
