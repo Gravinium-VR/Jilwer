@@ -1,6 +1,7 @@
 ﻿using UdonSharp;
 using UnityEngine;
 using Gravinium.Jilwer.Core;
+using UnityEngine.PlayerLoop;
 
 namespace Gravinium.Jilwer.Collections
 {
@@ -12,6 +13,7 @@ namespace Gravinium.Jilwer.Collections
         
         private int _length;
         private int _capacity;
+        private float _resizePercentFactor = 0.5f;
         
         private object[] _items;
         
@@ -52,25 +54,26 @@ namespace Gravinium.Jilwer.Collections
 
         public void Add(object item)
         {
-            // If the length is equal or greater than the current capacity, we must resize to fit another item
-            if (_length >= _capacity)
-            {
-                // Maybe have a system for setting the "resize factor" (new += old * factor)
-                if (_capacity < 2)
-                {
-                    _capacity = 2;
-                }
-                else
-                {
-                    _capacity += _capacity / 2; // Increase by 50%
-                }
-
-                Expand();
-            }
+            UpdateCapacity();
 
             // Add to the end of the array
             _items[_length] = item;
             _length++;
+        }
+
+        public Error Insert(object item, int index)
+        {
+            if (index < 0 || index >= _length)
+            {
+                return Error.IndexOutOfBounds;
+            }
+            
+            UpdateCapacity();
+            
+            ShiftAllRightStartingAt(index);
+            _items[index] = item;
+
+            return Error.None;
         }
         
         public Error Get(int index, out object item)
@@ -83,6 +86,11 @@ namespace Gravinium.Jilwer.Collections
 
             item = _items[index];
             return Error.None;
+        }
+
+        public object[] Array()
+        {
+            return _items;
         }
 
         public Error Remove(int index)
@@ -114,6 +122,33 @@ namespace Gravinium.Jilwer.Collections
                 newItems[i] = _items[i];
             }
             _items = newItems;
+        }
+
+        private void UpdateCapacity()
+        {
+            // If the length is equal or greater than the current capacity, we must resize to fit another item
+            if (_length >= _capacity)
+            {
+                // Maybe have a system for setting the "resize factor" (new += old * factor)
+                if (_capacity < 2)
+                {
+                    _capacity = 2;
+                }
+                else
+                {
+                    _capacity += (int)(_capacity * _resizePercentFactor); // Increase by 50%
+                }
+
+                Expand();
+            }
+        }
+
+        private void ShiftAllRightStartingAt(int index)
+        {
+            for (int i = _length - 1; i >= index; i--)
+            {
+                _items[i + 1] = _items[i];
+            }
         }
     }
 }

@@ -1,5 +1,21 @@
 ﻿# Changelog
 
+## [0.4.0](https://github.com/Gravinium-VR/Jilwer/releases/tag/0.4.0) - TBD
+
+### Notes
+
+- Started the implementation of the event system.
+
+### Added
+
+- ArrayList
+  - `Array` - Returns the internal array.
+  - `Insert` - Adds an item to the specified index.
+
+### Changed
+
+### Removed
+
 ## [0.3.0](https://github.com/Gravinium-VR/Jilwer/releases/tag/0.3.0) - 2026-07-05
 
 ### Notes
