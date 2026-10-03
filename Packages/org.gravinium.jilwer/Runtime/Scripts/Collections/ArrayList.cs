@@ -51,6 +51,11 @@ namespace Gravinium.Jilwer.Collections
             return _capacity;
         }
 
+        public bool IsEmpty()
+        {
+            return _length == 0;
+        }
+
         public void EnsureCapacity(int capacity)
         {
             _capacity += capacity;
@@ -66,7 +71,7 @@ namespace Gravinium.Jilwer.Collections
             _length++;
         }
 
-        public Error Insert(object item, int index)
+        public Error Add(int index, object item)
         {
             if (index < 0 || index >= _length)
             {
@@ -77,6 +82,15 @@ namespace Gravinium.Jilwer.Collections
             ShiftAllRightStartingAt(index);
             _items[index] = item;
 
+            return Error.None;
+        }
+
+        public Error Set(int index, object item)
+        {
+            if (index < 0 || index >= _length) return Error.IndexOutOfBounds;
+
+            _items[index] = item;
+            
             return Error.None;
         }
         
@@ -92,9 +106,27 @@ namespace Gravinium.Jilwer.Collections
             return Error.None;
         }
 
-        public object[] Array()
+        public bool Contains(object item)
         {
-            return _items;
+            for (int i = 0; i < _length; i++)
+            {
+                if (_items[i].Equals(item)) return true;
+            }
+
+            return false;
+        }
+
+        public void TrimToSize()
+        {
+            object[] arr = new object[_length];
+
+            for (int i = 0; i < _length; i++)
+            {
+                arr[i] = _items[i];
+            }
+
+            _items = arr;
+            _capacity = _length;
         }
 
         public Error Remove(int index)
@@ -112,6 +144,25 @@ namespace Gravinium.Jilwer.Collections
             _items[_length - 1] = null;
             _length--;
             return Error.None;
+        }
+
+        public void Clear()
+        {
+            _items = new object[DefaultCapacity];
+            _capacity = DefaultCapacity;
+            _length = 0;
+        }
+        
+        public object[] ToArray()
+        {
+            object[] arr = new object[_length];
+
+            for (int i = 0; i < _length; i++)
+            {
+                arr[i] = _items[i];
+            }
+            
+            return arr;
         }
         
         /* Private */

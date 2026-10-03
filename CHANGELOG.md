@@ -10,11 +10,19 @@ as of now.
 ### Added
 
 - ArrayList Methods
-  - `Array` - Returns the internal array.
+  - `ToArray` - Returns the list as an array.
   - `Insert` - Adds an item to the specified index.
   - `SetResizePercentFactor` - Changes resize factor, default 0.5 (50% inc)
+  - `Set` - Replaces the object at the specified index.
+  - `Contains` - Returns true of an object is found in the list.
+  - `TrimToSize` - Sets the capacity to the length of the list.
+  - `Clear` - Empties the list.
+  - `IsEmpty` - Returns true of the list is empty.
 
 ### Changed
+
+- ArrayList Methods
+  - `Insert(object item, int index)` is now `Add(int index, object item)`. 
 
 ### Removed
 

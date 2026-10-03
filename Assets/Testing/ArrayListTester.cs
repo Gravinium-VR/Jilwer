@@ -11,13 +11,13 @@ public class ArrayListTester : UdonSharpBehaviour
     private ArrayList _list;
     private int _counter = 1;
 
-    private void Start()
+    private void OnEnable()
     {
         var err = ArrayList.New(jilwer, out _list);
         if (err != Error.None)
         {
             Debug.LogError($"Failed to create ArrayList! Error: 0x{err:X2}");
-            Destroy(this);
+            enabled = false;
         }
     }
 
