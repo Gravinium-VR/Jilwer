@@ -13,12 +13,13 @@ public class ArrayListTester : UdonSharpBehaviour
 
     private void OnEnable()
     {
-        var err = ArrayList.New(jilwer, out _list);
-        if (err != Error.None)
-        {
-            Debug.LogError($"Failed to create ArrayList! Error: 0x{err:X2}");
-            enabled = false;
-        }
+        enabled = false;
+        // var err = ArrayList.New(jilwer, out _list);
+        // if (err != Error.None)
+        // {
+        //     Debug.LogError($"Failed to create ArrayList! Error: 0x{err:X2}");
+        //     enabled = false;
+        // }
     }
 
     public override void Interact()

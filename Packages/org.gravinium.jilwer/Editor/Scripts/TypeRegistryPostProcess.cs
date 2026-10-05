@@ -40,22 +40,13 @@ namespace Gravinium.Jilwer.Editor
 
         private static Type[] GetAllRegistries()
         {
-            // AI: I have zero clue how this works. I'll eventually get to rewriting this on my own, but until then,
-            // this comment will remain here. (Please give me Rust iterators T-T)
             return AppDomain.CurrentDomain.GetAssemblies()
-                .SelectMany(a =>
-                {
-                    try
-                    {
-                        return a.GetTypes();
-                    }
-                    catch (ReflectionTypeLoadException e)
-                    {
-                        return e.Types.Where(t => t != null);
-                    }
-                }).Where(t =>
-                    typeof(UdonSharpBehaviour).IsAssignableFrom(t) && !t.IsAbstract &&
-                    t.GetCustomAttribute<JilwerType>() != null).ToArray();
+                .SelectMany(a => {
+                    try { return a.GetTypes(); }
+                    catch (ReflectionTypeLoadException e) { return e.Types.Where(t => t != null); }
+                }).Where(t => typeof(UdonSharpBehaviour).IsAssignableFrom(t) &&
+                              !t.IsAbstract &&
+                              t.GetCustomAttribute<JilwerType>() != null).ToArray();
         }
         
     }

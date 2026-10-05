@@ -1,7 +1,5 @@
-﻿using System;
-using UdonSharp;
+﻿using UdonSharp;
 using UnityEngine;
-using UnityEngine.Serialization;
 using VRC.SDK3.Data;
 
 namespace Gravinium.Jilwer.Core

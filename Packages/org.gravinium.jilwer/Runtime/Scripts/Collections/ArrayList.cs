@@ -16,7 +16,14 @@ namespace Gravinium.Jilwer.Collections
         
         private object[] _items;
         
-        /* Public */
+        /* Constructors */
+        [JilwerIntrinsic(IntrinsicType.Runtime)]
+        public static Error New(out ArrayList value, int size = DefaultCapacity)
+        {
+            value = null;
+            return Error.None;
+        }
+        
         public static Error New(JilwerRuntime runtime, out ArrayList value, int size = DefaultCapacity)
         {
             var err = TypeRegistry.Create(runtime, nameof(ArrayList), out GameObject obj);
@@ -33,7 +40,8 @@ namespace Gravinium.Jilwer.Collections
             value = type;
             return Error.None;
         }
-
+        
+        /* Public */
         public void SetResizePercentFactor(float factor)
         {
             if (factor <= 0) factor = 0.01f;
@@ -81,6 +89,7 @@ namespace Gravinium.Jilwer.Collections
             UpdateCapacity();
             ShiftAllRightStartingAt(index);
             _items[index] = item;
+            _length++;
 
             return Error.None;
         }
@@ -110,7 +119,7 @@ namespace Gravinium.Jilwer.Collections
         {
             for (int i = 0; i < _length; i++)
             {
-                if (_items[i].Equals(item)) return true;
+                if (_items[i] == item) return true;
             }
 
             return false;

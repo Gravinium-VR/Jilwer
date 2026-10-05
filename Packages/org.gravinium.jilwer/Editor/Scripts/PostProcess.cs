@@ -11,15 +11,15 @@ namespace Gravinium.Jilwer.Editor
         {
             Debug.Log("[Jilwer] Starting post processing...");
 
-            GameObject JilwerObject = new GameObject("Jilwer");
+            GameObject jilwerObject = new GameObject("Jilwer");
             Debug.Log("[Jilwer] Parent object created");
 
             Debug.Log("[Jilwer] Running post process functions");
-            TypeRegistry registry = TypeRegistryPostProcess.CreateRegistryObjects(JilwerObject);
+            TypeRegistry registry = TypeRegistryPostProcess.CreateRegistryObjects(jilwerObject);
             Debug.Log("[Jilwer] Post process functions finished");
 
             Debug.Log("[Jilwer] Injecting runtime into objects");
-            RuntimeInjectPostProcess.InjectRuntime(JilwerObject, registry);
+            RuntimeInjectPostProcess.InjectRuntime(jilwerObject, registry);
 
             Debug.Log("[Jilwer] Post processing complete!");
         }
