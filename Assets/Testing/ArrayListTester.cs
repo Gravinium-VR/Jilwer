@@ -6,20 +6,17 @@ using Gravinium.Jilwer.Collections;
 [UdonBehaviourSyncMode(BehaviourSyncMode.None)]
 public class ArrayListTester : UdonSharpBehaviour
 {
-    [HideInInspector] public JilwerRuntime jilwer;
-
     private ArrayList _list;
     private int _counter = 1;
 
     private void OnEnable()
     {
-        enabled = false;
-        // var err = ArrayList.New(jilwer, out _list);
-        // if (err != Error.None)
-        // {
-        //     Debug.LogError($"Failed to create ArrayList! Error: 0x{err:X2}");
-        //     enabled = false;
-        // }
+        var err = ArrayList.New(out _list);
+        if (err != Error.None)
+        {
+            Debug.LogError($"Failed to create ArrayList! Error: 0x{err:X2}");
+            enabled = false;
+        }
     }
 
     public override void Interact()

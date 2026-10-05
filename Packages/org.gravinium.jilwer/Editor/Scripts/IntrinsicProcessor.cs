@@ -60,6 +60,8 @@ namespace Gravinium.Jilwer.Editor
                 SyntaxNode originalRoot = tree.GetRoot();
 
                 IntrinsicRewriter rewriter = new IntrinsicRewriter(semanticModel);
+                
+                if (!rewriter.CanProcess) continue;
 
                 SyntaxNode rewrittenRoot = rewriter.Visit(originalRoot);
 

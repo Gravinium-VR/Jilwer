@@ -23,9 +23,10 @@ namespace Gravinium.Jilwer.Editor
             _semanticModel = semanticModel;
 
             _intrinsicAttributeSymbol =
-                semanticModel.Compilation.GetTypeByMetadataName("Gravinium.Jilwer.Core.JilwerIntrinsic")
-                ?? throw new InvalidOperationException("Could not resolve Gravinium.Jilwer.Core.JilwerIntrinsic");
+                semanticModel.Compilation.GetTypeByMetadataName("Gravinium.Jilwer.Core.JilwerIntrinsic");
         }
+
+        public bool CanProcess => _intrinsicAttributeSymbol != null;
 
         public override SyntaxNode VisitInvocationExpression(InvocationExpressionSyntax node)
         {
@@ -77,7 +78,9 @@ private Gravinium.Jilwer.Core.JilwerRuntime {RuntimeFieldName};
 
         private AttributeData GetIntrinsic(IMethodSymbol method)
         {
-            return Enumerable.FirstOrDefault(method.GetAttributes(), attribute =>
+            if (_intrinsicAttributeSymbol == null) return null;
+
+            return method.GetAttributes().FirstOrDefault(attribute =>
                 SymbolEqualityComparer.Default.Equals(attribute.AttributeClass, _intrinsicAttributeSymbol));
         }
 
