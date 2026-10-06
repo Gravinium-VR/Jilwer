@@ -6,6 +6,7 @@
 
 - Started the implementation of the event system. Nothing will be done with it
 as of now.
+- Started the Jilwer compiler.
 
 ### Added
 
