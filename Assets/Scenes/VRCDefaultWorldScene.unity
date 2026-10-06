@@ -304,7 +304,6 @@ MonoBehaviour:
     PrefabModifications: []
     SerializationNodes: []
   _udonSharpBackingUdonBehaviour: {fileID: 881473210}
-  jilwer: {fileID: 0}
 --- !u!23 &881473212
 MeshRenderer:
   m_ObjectHideFlags: 0
