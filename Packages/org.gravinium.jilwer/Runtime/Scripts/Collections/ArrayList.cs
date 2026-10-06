@@ -17,7 +17,7 @@ namespace Gravinium.Jilwer.Collections
         private object[] _items;
         
         /* Constructors */
-        [JilwerIntrinsic(IntrinsicType.Runtime)]
+        [JilwerIntrinsic]
         public static Error New(out ArrayList value, int size = DefaultCapacity)
         {
             value = null;
