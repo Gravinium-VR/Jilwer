@@ -1,4 +1,6 @@
-﻿using System.IO;
+﻿using System;
+using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using UnityEditor;
 
@@ -8,14 +10,25 @@ namespace Gravinium.Jilwer.Editor.Compiler.Debug
     {
         private const string PreviewDirectory = "Library/Jilwer/CompilerPreview";
 
-        [MenuItem("Tools/Jilwer/Debug/Generate Compiler Preview")]
-        public static void Generate()
+        [MenuItem("Tools/Jilwer/Debug/Generate Compiler Preview", priority = 1)]
+        public static void GenerateLoaded()
+        {
+            Generate(JilwerCompiler.CompileLoadedScenes);
+        }
+        
+        [MenuItem("Tools/Jilwer/Debug/Generate Full Compiler Preview (slow)", priority = 2)]
+        public static void GenerateAll()
+        {
+            Generate(JilwerCompiler.CompileAll);
+        }
+
+        private static void Generate(Func<IReadOnlyList<JilwerCompilationResult>> compileFunc)
         {
             if (Directory.Exists(PreviewDirectory)) Directory.Delete(PreviewDirectory, true);
 
             Directory.CreateDirectory(PreviewDirectory);
 
-            var results = JilwerCompiler.CompileAll();
+            var results = compileFunc();
 
             int generatedCount = 0;
 

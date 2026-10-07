@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using Gravinium.Jilwer.Editor.Compiler.Passes;
@@ -19,6 +20,19 @@ namespace Gravinium.Jilwer.Editor.Compiler
 
         public static IReadOnlyList<JilwerCompilationResult> CompileAll()
         {
+            return CompileTargets(null);
+        }
+
+        public static IReadOnlyList<JilwerCompilationResult> CompileLoadedScenes()
+        {
+            var targets = JilwerCompilationTargets.GetLoadedSceneScripts();
+            return CompileTargets(targets);
+        }
+
+        private static IReadOnlyList<JilwerCompilationResult> CompileTargets(HashSet<string> targets)
+        {
+            Stopwatch total = Stopwatch.StartNew();
+            
             List<JilwerCompilationResult> results = new();
 
             Assembly[] assemblies = CompilationPipeline.GetAssemblies();
@@ -27,15 +41,38 @@ namespace Gravinium.Jilwer.Editor.Compiler
             {
                 if ((assembly.flags & AssemblyFlags.EditorAssembly) != 0) continue;
 
-                JilwerCompilationResult result = CompileAssembly(assembly);
-                
+                HashSet<string> assemblyTargets = GetAssemblyTargets(assembly, targets);
+
+                if (targets != null && assemblyTargets.Count == 0) continue;
+
+                JilwerCompilationResult result = CompileAssembly(assembly, targets == null ? null : assemblyTargets);
+
                 if (result.Sources.Count > 0) results.Add(result);
             }
+            
+            total.Stop();
+            
+            UnityEngine.Debug.Log($"[Jilwer] Compiler finished in {total.ElapsedMilliseconds} ms.");
 
             return results;
         }
 
-        private static JilwerCompilationResult CompileAssembly(Assembly assembly)
+        private static HashSet<string> GetAssemblyTargets(Assembly assembly, HashSet<string> targets)
+        {
+            HashSet<string> result = new(StringComparer.OrdinalIgnoreCase);
+
+            if (targets == null) return result;
+
+            foreach (string sourceFile in assembly.sourceFiles)
+            {
+                string normalized = JilwerCompilationTargets.NormalizePath(sourceFile);
+                if (targets.Contains(normalized)) result.Add(normalized);
+            }
+
+            return result;
+        }
+
+        private static JilwerCompilationResult CompileAssembly(Assembly assembly, HashSet<string> targets)
         {
             string[] sourceFiles = assembly.sourceFiles.Where(File.Exists).ToArray();
 
@@ -60,7 +97,7 @@ namespace Gravinium.Jilwer.Editor.Compiler
             {
                 if (!pass.CanRun(compilation)) continue;
 
-                compilation = RunPass(compilation, pass, context);
+                compilation = RunPass(compilation, pass, context, targets);
             }
 
             List<JilwerGeneratedSource> generated = BuildResults(assembly.name, originalTrees, compilation);
@@ -69,12 +106,18 @@ namespace Gravinium.Jilwer.Editor.Compiler
         }
 
         private static CSharpCompilation RunPass(CSharpCompilation compilation, IJilwerLowerPass pass,
-            JilwerCompilationContext context)
+            JilwerCompilationContext context, HashSet<string> targets)
         {
             List<(SyntaxTree OldTree, SyntaxTree NewTree)> replacements = new();
 
             foreach (SyntaxTree tree in compilation.SyntaxTrees)
             {
+                if (targets != null)
+                {
+                    string normalized = JilwerCompilationTargets.NormalizePath(tree.FilePath);
+                    if (!targets.Contains(normalized)) continue;
+                }
+                
                 SemanticModel semanticModel = compilation.GetSemanticModel(tree, ignoreAccessibility: true);
 
                 SyntaxNode originalRoot = tree.GetRoot();
