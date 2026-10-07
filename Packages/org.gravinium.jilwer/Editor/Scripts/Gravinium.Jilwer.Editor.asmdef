@@ -21,7 +21,10 @@
         "Microsoft.CodeAnalysis.dll",
         "Microsoft.CodeAnalysis.CSharp.dll",
         "VRCSDK3.dll",
-        "System.Collections.Immutable.dll"
+        "System.Collections.Immutable.dll",
+        "0Harmony.dll",
+        "VRC.Udon.Common.dll",
+        "VRCSDKBase.dll"
     ],
     "autoReferenced": true,
     "defineConstraints": [],

@@ -46,7 +46,7 @@ namespace Gravinium.Jilwer.Editor.Compiler.Passes
                 MemberDeclarationSyntax runtimeField = SyntaxFactory.ParseMemberDeclaration($@"
 [UnityEngine.SerializeField]
 [UnityEngine.HideInInspector]
-private Gravinium.Jilwer.Core.JilwerRuntime {RuntimeFieldName};
+public Gravinium.Jilwer.Core.JilwerRuntime {RuntimeFieldName};
 ");
 
                 return rewritten.AddMembers(runtimeField);
