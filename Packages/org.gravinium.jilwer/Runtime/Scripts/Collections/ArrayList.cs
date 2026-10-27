@@ -1,9 +1,10 @@
-﻿using UdonSharp;
+using UdonSharp;
 using UnityEngine;
 using Gravinium.Jilwer.Core;
 
 namespace Gravinium.Jilwer.Collections
 {
+    //testt
     [JilwerType]
     [UdonBehaviourSyncMode(BehaviourSyncMode.None)]
     public class ArrayList : UdonSharpBehaviour
@@ -17,7 +18,12 @@ namespace Gravinium.Jilwer.Collections
         private object[] _items;
         
         /* Constructors */
-        [JilwerIntrinsic]
+        public ArrayList(int size = DefaultCapacity)
+        {
+            _capacity = size;
+            _items = new object[size];
+        }
+        
         public static Error New(out ArrayList value, int size = DefaultCapacity)
         {
             value = null;

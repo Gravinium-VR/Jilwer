@@ -18,13 +18,13 @@
     "allowUnsafeCode": false,
     "overrideReferences": true,
     "precompiledReferences": [
+        "VRCSDKBase.dll",
+        "VRCSDK3.dll",
+        "VRC.Udon.Common.dll",
         "Microsoft.CodeAnalysis.dll",
         "Microsoft.CodeAnalysis.CSharp.dll",
-        "VRCSDK3.dll",
         "System.Collections.Immutable.dll",
-        "0Harmony.dll",
-        "VRC.Udon.Common.dll",
-        "VRCSDKBase.dll"
+        "0Harmony.dll"
     ],
     "autoReferenced": true,
     "defineConstraints": [],
