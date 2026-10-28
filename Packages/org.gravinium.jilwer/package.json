@@ -1,7 +1,7 @@
 {
   "name": "org.gravinium.jilwer",
   "displayName": "Jilwer",
-  "description": "A toolkit that extends UdonSharp with additional runtime capabilities, reusable systems, and utility functions for VRChat world and tooling development",
+  "description": "A toolkit that extends UdonSharp with additional editor and runtime capabilities, reusable systems, and utility functions for VRChat world and tooling development.",
   "version": "0.4.0",
   "unity": "2022.3",
   "vrchatVersion": "2022.1.1",

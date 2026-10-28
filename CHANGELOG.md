@@ -4,16 +4,15 @@
 
 ### Notes
 
-- Started the implementation of the event system. Nothing will be done with it
-as of now.
-- Started the Jilwer compiler.
+- Constructors have partial support and may stay as such.
+- Intrinsic runtime injection added but needs work. Injects into caller atm.
 
 ### Added
 
+- ArrayList constructor `public ArrayList(int size = DefaultCapacity)`
 - ArrayList Methods
   - `ToArray` - Returns the list as an array.
-  - `Insert` - Adds an item to the specified index.
-  - `SetResizePercentFactor` - Changes resize factor, default 0.5 (50% inc)
+  - `SetResizeIncreasePercent` - Changes resize percent, default 0.5 (50% inc)
   - `Set` - Replaces the object at the specified index.
   - `Contains` - Returns true of an object is found in the list.
   - `TrimToSize` - Sets the capacity to the length of the list.
@@ -23,9 +22,11 @@ as of now.
 ### Changed
 
 - ArrayList Methods
-  - `Insert(object item, int index)` is now `Add(int index, object item)`. 
+  - `Insert(object item, int index)` is now `Add(int index, object item)`.
 
 ### Removed
+
+- `ArrayList.New` - Use constructors now.
 
 ## [0.3.0](https://github.com/Gravinium-VR/Jilwer/releases/tag/0.3.0) - 2026-07-05
 

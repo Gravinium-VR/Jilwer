@@ -1,15 +1,12 @@
-﻿
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
 using HarmonyLib;
 using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
 using UnityEditor;
 using UnityEditor.Compilation;
-using UnityEngine;
 
 namespace Gravinium.Jilwer.Editor.Compiler.Integration
 {
@@ -23,7 +20,7 @@ namespace Gravinium.Jilwer.Editor.Compiler.Integration
 
         static JilwerUdonCompileHook()
         {
-            RefreshReferences();
+            RefreshReferences(); // Need refs off of main thread
             Install();
             CompilationPipeline.compilationFinished += OnCompilationFinished;
         }
@@ -36,14 +33,10 @@ namespace Gravinium.Jilwer.Editor.Compiler.Integration
             {
                 Type contextType = AccessTools.TypeByName("UdonSharp.Compiler.CompilationContext");
 
-                if (contextType == null)
-                    throw new MissingMemberException("UdonSharp CompilationContext");
+                if (contextType == null) throw new MissingMemberException("UdonSharp CompilationContext");
 
                 MethodInfo target = contextType
-                    .GetMethods(
-                        BindingFlags.Instance |
-                        BindingFlags.Public |
-                        BindingFlags.NonPublic)
+                    .GetMethods(BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic)
                     .Single(m =>
                         m.Name == "LoadSyntaxTreesAndCreateModules" &&
                         m.GetParameters().Length == 1 &&
@@ -94,11 +87,11 @@ namespace Gravinium.Jilwer.Editor.Compiler.Integration
             }
         }
 
-        private static void AfterModulesLoaded(object __result)
+        private static void AfterModulesLoaded(object __result) // __result is harmony injected
         {
-            UnityEngine.Debug.Log("[Jilwer] UdonSharp compilation intercepted, running transformations...");
+            //UnityEngine.Debug.Log("[Jilwer] UdonSharp compilation intercepted, running transformations...");
 
-            if (!(__result is Array modules) || modules.Length == 0)
+            if (__result is not Array modules || modules.Length == 0)
             {
                 UnityEngine.Debug.LogWarning("[Jilwer] UdonSharp returned no modules.");
                 return;
@@ -106,11 +99,7 @@ namespace Gravinium.Jilwer.Editor.Compiler.Integration
 
             FieldInfo treeField = modules.GetValue(0)
                 .GetType()
-                .GetField(
-                    "tree",
-                    BindingFlags.Instance |
-                    BindingFlags.Public |
-                    BindingFlags.NonPublic);
+                .GetField("tree", BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
 
             if (treeField == null) throw new MissingFieldException("ModuleBinding.tree");
 
@@ -118,7 +107,7 @@ namespace Gravinium.Jilwer.Editor.Compiler.Integration
 
             foreach (object module in modules)
             {
-                if (!(treeField.GetValue(module) is SyntaxTree tree))
+                if (treeField.GetValue(module) is not SyntaxTree tree)
                 {
                     throw new InvalidOperationException("UdonSharp returned a module without a syntax tree.");
                 }

@@ -1,13 +1,11 @@
-﻿
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.IO;
 using System.Linq;
+using Gravinium.Jilwer.Editor.Compiler.Debug;
 using Gravinium.Jilwer.Editor.Compiler.Passes;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
-using UnityEditor.Compilation;
 
 namespace Gravinium.Jilwer.Editor.Compiler
 {
@@ -16,6 +14,7 @@ namespace Gravinium.Jilwer.Editor.Compiler
         private static readonly IJilwerLowerPass[] Passes =
         {
             new IntrinsicLoweringPass(),
+            new ConstructorInvocationLoweringPass(),
             new ConstructorLoweringPass(),
             new RuntimeStatePass(),
         };
@@ -24,6 +23,8 @@ namespace Gravinium.Jilwer.Editor.Compiler
             IReadOnlyList<SyntaxTree> sourceTrees,
             IEnumerable<MetadataReference> references)
         {
+            Stopwatch totalTime = Stopwatch.StartNew();
+            
             CSharpCompilation compilation =
                 CSharpCompilation.Create(
                     "Jilwer.InMemory",
@@ -32,17 +33,25 @@ namespace Gravinium.Jilwer.Editor.Compiler
                     new CSharpCompilationOptions(OutputKind.DynamicallyLinkedLibrary));
 
             var context = new JilwerCompilationContext();
+            
+            JilwerCompilerDebug.Begin();
+            JilwerCompilerDebug.Capture(0, "Original", compilation.SyntaxTrees);
 
+            int passIndex = 1;
             foreach (IJilwerLowerPass pass in Passes)
             {
-                if (!pass.CanRun(compilation))
-                    continue;
+                if (pass.CanRun(compilation))
+                {
+                    compilation = RunPass(compilation, pass, context);
+                }
 
-                compilation = RunPass(
-                    compilation,
-                    pass,
-                    context);
+                JilwerCompilerDebug.Capture(passIndex++, pass.GetType().Name, compilation.SyntaxTrees);
             }
+            
+            JilwerCompilerDebug.Capture(passIndex, "Final", compilation.SyntaxTrees);
+            
+            totalTime.Stop();
+            UnityEngine.Debug.Log($"[Jilwer] Compiler finished in {totalTime.ElapsedMilliseconds} ms.");
 
             return compilation.SyntaxTrees.ToArray();
         }

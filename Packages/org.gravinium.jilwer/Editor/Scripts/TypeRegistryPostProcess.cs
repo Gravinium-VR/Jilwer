@@ -10,9 +10,9 @@ using UnityEngine;
 
 namespace Gravinium.Jilwer.Editor
 {
-    public static class TypeRegistryPostProcess
+    internal static class TypeRegistryPostProcess
     {
-        public static TypeRegistry CreateRegistryObjects(GameObject jilwerObject)
+        internal static TypeRegistry CreateRegistryObjects(GameObject jilwerObject)
         {
             GameObject registryObject = new GameObject("Jilwer__TypeRegistry")
                 { transform = { parent = jilwerObject.transform } };

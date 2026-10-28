@@ -1,3 +1,4 @@
+// ReSharper disable Unity.IncorrectMonoBehaviourInstantiation
 using UdonSharp;
 using UnityEngine;
 using Gravinium.Jilwer.Core;
@@ -8,15 +9,10 @@ public class ArrayListTester : UdonSharpBehaviour
 {
     private ArrayList _list;
     private int _counter = 1;
-
+    
     private void OnEnable()
     {
-        var err = ArrayList.New(out _list);
-        if (err != Error.None)
-        {
-            Debug.LogError($"Failed to create ArrayList! Error: 0x{err:X2}");
-            enabled = false;
-        }
+        _list = new ArrayList();
     }
 
     public override void Interact()

@@ -49,7 +49,7 @@ namespace Gravinium.Jilwer.Editor.Compiler.Passes
 public Gravinium.Jilwer.Core.JilwerRuntime {RuntimeFieldName};
 ");
 
-                return rewritten.AddMembers(runtimeField);
+                return rewritten.WithMembers(rewritten.Members.Insert(0, runtimeField));
             }
 
             private static bool HasRuntimeField(ClassDeclarationSyntax node)

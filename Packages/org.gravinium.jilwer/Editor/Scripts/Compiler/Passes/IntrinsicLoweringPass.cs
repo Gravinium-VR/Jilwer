@@ -33,7 +33,9 @@ namespace Gravinium.Jilwer.Editor.Compiler.Passes
             private readonly JilwerCompilationContext _context;
             private readonly INamedTypeSymbol _intrinsicAttribute;
 
-            public Rewriter(SemanticModel semanticModel, JilwerCompilationContext context,
+            public Rewriter(
+                SemanticModel semanticModel,
+                JilwerCompilationContext context,
                 INamedTypeSymbol intrinsicAttribute)
             {
                 _semanticModel = semanticModel;
@@ -47,9 +49,7 @@ namespace Gravinium.Jilwer.Editor.Compiler.Passes
 
                 InvocationExpressionSyntax rewritten = (InvocationExpressionSyntax)base.VisitInvocationExpression(node);
 
-                if (method == null) return rewritten;
-
-                if (!HasIntrinsicAttribute(method)) return rewritten;
+                if (method == null || !HasIntrinsicAttribute(method)) return rewritten;
 
                 if (_semanticModel.GetEnclosingSymbol(node.SpanStart) is not IMethodSymbol caller)
                     throw new InvalidOperationException($"Unable to determine caller for intrinsic '{method.Name}'");

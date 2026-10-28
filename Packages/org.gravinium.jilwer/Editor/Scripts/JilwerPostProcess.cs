@@ -33,7 +33,6 @@ namespace Gravinium.Jilwer.Editor
                 Object.FindObjectsOfType(typeof(UdonBehaviour), true).OfType<UdonBehaviour>().ToArray();
 
             int injected = 0;
-
             foreach (UdonBehaviour behaviour in behaviours)
             {
                 if (behaviour == runtimeBacking) continue;
