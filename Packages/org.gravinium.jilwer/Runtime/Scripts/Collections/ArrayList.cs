@@ -13,7 +13,7 @@ namespace Gravinium.Jilwer.Collections
     {
         private const int DefaultCapacity = 10;
         
-        private int _length = 0;
+        private int _length;
         private int _capacity;
         private float _resizeIncreasePercent = 0.5f;
         

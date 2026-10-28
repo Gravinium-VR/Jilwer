@@ -18,6 +18,7 @@
   - `TrimToSize` - Sets the capacity to the length of the list.
   - `Clear` - Empties the list.
   - `IsEmpty` - Returns true of the list is empty.
+  - `Destroy` - Destroys the GameObject (mem/scene cleanup)
 
 ### Changed
 
