@@ -30,6 +30,9 @@ keyword in methods.
 - SDFMath Methods
   - `SDSphere` - Returns distance from sphere surface.
   - `SDBox` - Returns distance from box surface.
+- ArrayMath Methods
+  - `Index2DTo1D`, `Index3DTo1D`, `Index1DTo2D`, `Index1DTo3D` - Converts
+between index of different array ranks.
 
 ### Changed
 
