@@ -4,8 +4,11 @@
 
 ### Notes
 
-- Constructors have partial support and may stay as such.
-- Intrinsic runtime injection added but needs work. Injects into caller atm.
+- Major milestone as this version adds the working Jilwer compiler. It is still
+limited, but it's a great start.
+- Constructors have partial support and may stay as such. Only use the `new`
+keyword in methods.
+- Fixed asmdefs so now it's `Gravinium.Jilwer` and `Gravinium.Jilwer.Editor`.
 
 ### Added
 
@@ -19,6 +22,14 @@
   - `Clear` - Empties the list.
   - `IsEmpty` - Returns true of the list is empty.
   - `Destroy` - Destroys the GameObject (mem/scene cleanup)
+- `JilwerIntrinsic` - Not currently used (old system that may be reused)
+- VectorMath Methods
+  - `Abs` - Each components absolute value.
+  - `Max` - Max of each component between two Vectors.
+  - `Min` - Min of each component between two Vectors.
+- SDFMath Methods
+  - `SDSphere` - Returns distance from sphere surface.
+  - `SDBox` - Returns distance from box surface.
 
 ### Changed
 

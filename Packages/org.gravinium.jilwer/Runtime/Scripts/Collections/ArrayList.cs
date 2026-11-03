@@ -1,5 +1,6 @@
 using UdonSharp;
 using Gravinium.Jilwer.Core;
+using JetBrains.Annotations;
 
 namespace Gravinium.Jilwer.Collections
 {
@@ -25,6 +26,7 @@ namespace Gravinium.Jilwer.Collections
         /// </summary>
         /// <param name="size">Initial size of the array.</param>
         /// <seealso href="http://docs.gravinium.org/projects/jilwer/api/collections/arraylist#constructor"/>
+        [PublicAPI]
         public ArrayList(int size = DefaultCapacity)
         {
             _capacity = size;
@@ -37,6 +39,7 @@ namespace Gravinium.Jilwer.Collections
         /// </summary>
         /// <param name="factor">The percentage increase on resize.</param>
         /// <seealso href="http://docs.gravinium.org/projects/jilwer/api/collections/arraylist#setresizeincreasepercent"/>
+        [PublicAPI]
         public void SetResizeIncreasePercent(float factor)
         {
             if (factor <= 0) factor = 0.01f;
@@ -49,6 +52,7 @@ namespace Gravinium.Jilwer.Collections
         /// </summary>
         /// <returns>The length of the list.</returns>
         /// <seealso href="http://docs.gravinium.org/projects/jilwer/api/collections/arraylist#length"/>
+        [PublicAPI]
         public int Length() => _length;
 
         /// <summary>
@@ -56,6 +60,7 @@ namespace Gravinium.Jilwer.Collections
         /// </summary>
         /// <returns>The total capacity.</returns>
         /// <seealso href="http://docs.gravinium.org/projects/jilwer/api/collections/arraylist#capacity"/>
+        [PublicAPI]
         public int Capacity() => _capacity;
 
         /// <summary>
@@ -63,6 +68,7 @@ namespace Gravinium.Jilwer.Collections
         /// </summary>
         /// <returns>Boolean of empty state.</returns>
         /// <seealso href="http://docs.gravinium.org/projects/jilwer/api/collections/arraylist#isempty"/>
+        [PublicAPI]
         public bool IsEmpty() => _length == 0;
 
         /// <summary>
@@ -71,6 +77,7 @@ namespace Gravinium.Jilwer.Collections
         /// </summary>
         /// <param name="capacity">Extra capacity to add.</param>
         /// <seealso href="http://docs.gravinium.org/projects/jilwer/api/collections/arraylist#ensurecapacity"/>
+        [PublicAPI]
         public void EnsureCapacity(int capacity)
         {
             _capacity += capacity;
@@ -82,6 +89,7 @@ namespace Gravinium.Jilwer.Collections
         /// </summary>
         /// <param name="item">Object being added.</param>
         /// <seealso href="http://docs.gravinium.org/projects/jilwer/api/collections/arraylist#add-last"/>
+        [PublicAPI]
         public void Add(object item)
         {
             UpdateCapacity();
@@ -98,6 +106,7 @@ namespace Gravinium.Jilwer.Collections
         /// <param name="item">Object to add.</param>
         /// <returns>None or IndexOutOfBounds</returns>
         /// <seealso href="http://docs.gravinium.org/projects/jilwer/api/collections/arraylist#add-at"/>
+        [PublicAPI]
         public Error Add(int index, object item)
         {
             if (index < 0 || index >= _length)
@@ -120,6 +129,7 @@ namespace Gravinium.Jilwer.Collections
         /// <param name="item">Object being added.</param>
         /// <returns>None or IndexOutOfBounds</returns>
         /// <seealso href="http://docs.gravinium.org/projects/jilwer/api/collections/arraylist#set"/>
+        [PublicAPI]
         public Error Set(int index, object item)
         {
             if (index < 0 || index >= _length) return Error.IndexOutOfBounds;
@@ -136,6 +146,7 @@ namespace Gravinium.Jilwer.Collections
         /// <param name="item">Returned object.</param>
         /// <returns>Error and item</returns>
         /// <seealso href="http://docs.gravinium.org/projects/jilwer/api/collections/arraylist#get"/>
+        [PublicAPI]
         public Error Get(int index, out object item)
         {
             if (index < 0 || index >= _length)
@@ -154,6 +165,7 @@ namespace Gravinium.Jilwer.Collections
         /// <param name="item">Object to match.</param>
         /// <returns>True if found, false if not.</returns>
         /// <seealso href="http://docs.gravinium.org/projects/jilwer/api/collections/arraylist#contains"/>
+        [PublicAPI]
         public bool Contains(object item)
         {
             for (int i = 0; i < _length; i++)
@@ -168,6 +180,7 @@ namespace Gravinium.Jilwer.Collections
         /// Recreates the array to have a capacity equal to the size.
         /// </summary>
         /// <seealso href="http://org.gravinium.org/projects/jilwer/api/collections/arraylist#trimtosize"/>
+        [PublicAPI]
         public void TrimToSize()
         {
             object[] arr = new object[_length];
@@ -188,6 +201,7 @@ namespace Gravinium.Jilwer.Collections
         /// <param name="index">Index of the item to remove.</param>
         /// <returns>None or IndexOutOfBounds</returns>
         /// <seealso href="http://docs.gravinium.org/projects/jilwer/api/collections/arraylist#remove"/>
+        [PublicAPI]
         public Error Remove(int index)
         {
             if (index < 0 || index >= _length)
@@ -209,6 +223,7 @@ namespace Gravinium.Jilwer.Collections
         /// Resets the array to the default size, clearing all items.
         /// </summary>
         /// <seealso href="http://docs.gravinium.org/projects/jilwer/api/collections/arraylist#clear"/>
+        [PublicAPI]
         public void Clear()
         {
             _items = new object[DefaultCapacity];
@@ -221,6 +236,7 @@ namespace Gravinium.Jilwer.Collections
         /// </summary>
         /// <returns>Object array.</returns>
         /// <seealso href="http://docs.gravinium.org/projects/jilwer/api/collections/arraylist#toarray"/>
+        [PublicAPI]
         public object[] ToArray()
         {
             object[] arr = new object[_length];
@@ -237,6 +253,7 @@ namespace Gravinium.Jilwer.Collections
         /// Destroys the underlying GameObject and the ArrayList. Used to clean up the scene after use of the array.
         /// </summary>
         /// <seealso href="http://docs.gravinium.org/projects/jilwer/api/collections/arraylist#destroy"/>
+        [PublicAPI]
         public void Destroy() => Destroy(gameObject);
         
         /* Private */
@@ -252,7 +269,8 @@ namespace Gravinium.Jilwer.Collections
             }
             _items = newItems;
         }
-
+        
+        /* Private */
         private void UpdateCapacity()
         {
             // If the length is equal or greater than the current capacity, we must resize to fit another item

@@ -62,7 +62,7 @@ MonoBehaviour:
       Data: 3|System.RuntimeType, mscorlib
     - Name: 
       Entry: 1
-      Data: Gravinium.Jilwer.Core.JilwerRuntime, Gravinium.Jilwer.Core
+      Data: Gravinium.Jilwer.Core.JilwerRuntime, Gravinium.Jilwer
     - Name: 
       Entry: 8
       Data: 
@@ -134,7 +134,7 @@ MonoBehaviour:
       Data: 9|System.RuntimeType, mscorlib
     - Name: 
       Entry: 1
-      Data: Gravinium.Jilwer.Collections.ArrayList, Gravinium.Jilwer.Collections
+      Data: Gravinium.Jilwer.Collections.ArrayList, Gravinium.Jilwer
     - Name: 
       Entry: 8
       Data: 
