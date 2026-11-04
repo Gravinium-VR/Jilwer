@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Gravinium.Jilwer.Core;
+using UnityEngine;
 
 namespace Gravinium.Jilwer.Editor
 {
@@ -6,11 +7,13 @@ namespace Gravinium.Jilwer.Editor
     {
         public static GameObject Root;
         public static GameObject RuntimeObject;
+        public static JilwerRuntime Runtime;
 
         public static void Clear()
         {
             Root = null;
             RuntimeObject = null;
+            Runtime = null;
         }
     }
 }

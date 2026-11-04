@@ -10,7 +10,7 @@ namespace Gravinium.Jilwer.Editor
     internal static class JilwerPostProcess
     {
         [PostProcessScene(10000)]
-        private static void BindGeneratedState()
+        private static void PostProcess()
         {
             GameObject runtimeObject = JilwerBuildState.RuntimeObject;
 

@@ -1,5 +1,4 @@
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.Linq;
 using System.Reflection;
 using Gravinium.Jilwer.Core;
@@ -7,15 +6,17 @@ using UdonSharp;
 using UdonSharpEditor;
 using UnityEngine;
 
-
-namespace Gravinium.Jilwer.Editor
+namespace Gravinium.Jilwer.Editor.PreProcess
 {
-    internal static class TypeRegistryPostProcess
+    internal class TypeRegistryPreProcess : IPreProcess
     {
-        internal static TypeRegistry CreateRegistryObjects(GameObject jilwerObject)
+        public void Process()
         {
+            if (!JilwerBuildState.Root) throw new MissingFieldException("[Jilwer] Root object not found.");
+            if (!JilwerBuildState.Runtime) throw new MissingFieldException("[Jilwer] Runtime not found.");
+            
             GameObject registryObject = new GameObject("Jilwer__TypeRegistry")
-                { transform = { parent = jilwerObject.transform } };
+                { transform = { parent = JilwerBuildState.Root.transform } };
             TypeRegistry registryComponent = registryObject.AddUdonSharpComponent<TypeRegistry>();
 
             GameObject typeObjectParent = new GameObject("Jilwer__TypeObjects") 
@@ -35,9 +36,9 @@ namespace Gravinium.Jilwer.Editor
                 registryComponent.objects.Add(name, typeObject);
             }
 
-            return registryComponent;
+            JilwerBuildState.Runtime.typeRegistry = registryComponent;
         }
-
+        
         private static Type[] GetAllRegistries()
         {
             return AppDomain.CurrentDomain.GetAssemblies()
@@ -48,7 +49,5 @@ namespace Gravinium.Jilwer.Editor
                               !t.IsAbstract &&
                               t.GetCustomAttribute<JilwerType>() != null).ToArray();
         }
-        
     }
-
 }
