@@ -3,7 +3,7 @@ using UdonSharp;
 using UnityEngine;
 using Gravinium.Jilwer.Core;
 using Gravinium.Jilwer.Collections;
-using Gravinium.Jilwer.Math;
+using Gravinium.Jilwer.VRC;
 
 [UdonBehaviourSyncMode(BehaviourSyncMode.None)]
 public class ArrayListTester : UdonSharpBehaviour
@@ -14,8 +14,6 @@ public class ArrayListTester : UdonSharpBehaviour
     private void OnEnable()
     {
         _list = new ArrayList();
-        
-        Debug.Log(VectorMath.Abs(new Vector3(-1, -2, -3)));
     }
 
     public override void Interact()

@@ -19,10 +19,10 @@ namespace Gravinium.Jilwer.Editor
         [PostProcessScene(-10000)]
         private static void PreProcess()
         {
-            JilwerBuildState.Clear();
-            
             Debug.Log($"[Jilwer] Running PreProcess.");
             Stopwatch stopwatch = Stopwatch.StartNew();
+            
+            JilwerBuildState.Clear();
 
             GameObject root = new GameObject("Jilwer");
             JilwerBuildState.Root = root;

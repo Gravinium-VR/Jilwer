@@ -33,6 +33,8 @@ keyword in methods.
 - ArrayMath Methods
   - `Index2DTo1D`, `Index3DTo1D`, `Index1DTo2D`, `Index1DTo3D` - Converts
 between index of different array ranks.
+- `ObjectPoolSpawner` - Spawns copies of an object that attach to a
+`VRCObjectPool`.
 
 ### Changed
 

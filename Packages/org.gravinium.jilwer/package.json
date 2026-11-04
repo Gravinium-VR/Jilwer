@@ -18,6 +18,6 @@
   ],
   "license": "MIT",
   "vpmDependencies": {
-    "com.vrchat.worlds": "3.10.x"
+    "com.vrchat.worlds": ">=3.10.6 <3.11"
   }
 }
