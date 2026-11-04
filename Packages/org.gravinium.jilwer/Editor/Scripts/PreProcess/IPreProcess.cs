@@ -1,6 +1,4 @@
-﻿using UnityEngine;
-
-namespace Gravinium.Jilwer.Editor.PreProcess
+﻿namespace Gravinium.Jilwer.Editor.PreProcess
 {
     internal interface IPreProcess
     {

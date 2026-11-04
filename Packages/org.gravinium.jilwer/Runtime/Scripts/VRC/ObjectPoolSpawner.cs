@@ -1,15 +1,16 @@
 ﻿#if UNITY_EDITOR
-using UdonSharp;
+using UnityEditor;
 using UnityEngine;
 using VRC.SDK3.Components;
-using VRC.SDKBase;
-using VRC.Udon;
 
 namespace Gravinium.Jilwer.VRC
 {
+    [ExecuteInEditMode]
     public class ObjectPoolSpawner : MonoBehaviour
     {
         public VRCObjectPool objectPool;
+        public GameObject referenceObject;
+        public int copies = 1;
     }
 }
 #endif

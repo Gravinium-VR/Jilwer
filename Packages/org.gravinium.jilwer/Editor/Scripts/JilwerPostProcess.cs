@@ -1,65 +1,29 @@
-﻿using System.Linq;
-using Gravinium.Jilwer.Editor.Compiler.Passes;
+﻿using System.Diagnostics;
+using Gravinium.Jilwer.Editor.PostProcess;
 using UnityEditor.Callbacks;
-using UnityEngine;
-using VRC.Udon;
-using VRC.Udon.Common;
+using Debug = UnityEngine.Debug;
 
 namespace Gravinium.Jilwer.Editor
 {
     internal static class JilwerPostProcess
     {
+        private static readonly IPostProcess[] Passes =
+        {
+            new InjectRuntimePostProcess(),
+        };
+        
         [PostProcessScene(10000)]
         private static void PostProcess()
         {
-            GameObject runtimeObject = JilwerBuildState.RuntimeObject;
-
-            if (!runtimeObject)
-            {
-                Debug.LogError($"[Jilwer] Runtime object disappeared during scene processing.");
-                return;
-            }
-
-            UdonBehaviour runtimeBacking = runtimeObject.GetComponents(typeof(UdonBehaviour)).OfType<UdonBehaviour>()
-                .FirstOrDefault();
-
-            if (runtimeBacking == null)
-            {
-                Debug.LogError($"[Jilwer] Runtime backing UdonBehaviour was not generated.");
-                return;
-            }
-
-            UdonBehaviour[] behaviours =
-                Object.FindObjectsOfType(typeof(UdonBehaviour), true).OfType<UdonBehaviour>().ToArray();
-
-            int injected = 0;
-            foreach (UdonBehaviour behaviour in behaviours)
-            {
-                if (behaviour == runtimeBacking) continue;
-
-                var program = behaviour.programSource?.SerializedProgramAsset?.RetrieveProgram();
-
-                if (program == null) continue;
-                
-                if (!program.SymbolTable.HasAddressForSymbol(RuntimeStatePass.RuntimeFieldName)) continue;
-
-                if (behaviour.publicVariables.TrySetVariableValue(RuntimeStatePass.RuntimeFieldName, runtimeBacking))
-                {
-                    injected++;
-                    Debug.Log($"[Jilwer] Updated runtime on '{behaviour.gameObject.name}'.");
-                    continue;
-                }
-
-                behaviour.publicVariables.TryAddVariable(
-                    new UdonVariable<UdonBehaviour>(RuntimeStatePass.RuntimeFieldName, runtimeBacking));
-                injected++;
-                
-                Debug.Log($"[Jilwer] Added generated runtime variable to '{behaviour.gameObject.name}'.");
-            }
+            Debug.Log($"[Jilwer] Running PostProcess.");
+            Stopwatch stopwatch = Stopwatch.StartNew();
             
-            Debug.Log($"[Jilwer] Runtime injected into {injected} behaviour(s).");
+            foreach (IPostProcess pass in Passes) pass.Process();
             
             JilwerBuildState.Clear();
+            
+            stopwatch.Stop();
+            Debug.Log($"[Jilwer] Finished PostProcess in {stopwatch.ElapsedMilliseconds}ms.");
         }
     }
 }
