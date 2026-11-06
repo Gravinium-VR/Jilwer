@@ -35,6 +35,9 @@ keyword in methods.
 between index of different array ranks.
 - `ObjectPoolSpawner` - Spawns copies of an object that attach to a
 `VRCObjectPool`.
+- NetworkUtilities methods
+  - `SetOwner` - Sets a player to be the owner of an object.
+  - `TakeOwner` - Sets the local player to be the owner of an object.
 
 ### Changed
 
