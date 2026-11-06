@@ -1,24 +1,19 @@
-﻿using UdonSharp;
+// ReSharper disable Unity.IncorrectMonoBehaviourInstantiation
+using UdonSharp;
 using UnityEngine;
 using Gravinium.Jilwer.Core;
 using Gravinium.Jilwer.Collections;
+using Gravinium.Jilwer.VRC;
 
 [UdonBehaviourSyncMode(BehaviourSyncMode.None)]
 public class ArrayListTester : UdonSharpBehaviour
 {
-    [HideInInspector] public JilwerRuntime jilwer;
-
     private ArrayList _list;
     private int _counter = 1;
-
-    private void Start()
+    
+    private void OnEnable()
     {
-        var err = ArrayList.New(jilwer, out _list);
-        if (err != Error.None)
-        {
-            Debug.LogError($"Failed to create ArrayList! Error: 0x{err:X2}");
-            Destroy(this);
-        }
+        _list = new ArrayList();
     }
 
     public override void Interact()

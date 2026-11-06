@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Gravinium.Jilwer.Editor
 {
-    public static class Help
+    internal static class Help
     {
         [MenuItem("Tools/Jilwer/Help/About", priority = 0)]
         private static void ShowAbout()

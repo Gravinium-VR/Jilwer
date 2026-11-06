@@ -1,5 +1,53 @@
 ﻿# Changelog
 
+## [0.4.0](https://github.com/Gravinium-VR/Jilwer/releases/tag/0.4.0) - TBD
+
+### Notes
+
+- Major milestone as this version adds the working Jilwer compiler. It is still
+limited, but it's a great start.
+- Constructors have partial support and may stay as such. Only use the `new`
+keyword in methods.
+- Fixed asmdefs so now it's `Gravinium.Jilwer` and `Gravinium.Jilwer.Editor`.
+
+### Added
+
+- ArrayList constructor `public ArrayList(int size = DefaultCapacity)`
+- ArrayList Methods
+  - `ToArray` - Returns the list as an array.
+  - `SetResizeIncreasePercent` - Changes resize percent, default 0.5 (50% inc)
+  - `Set` - Replaces the object at the specified index.
+  - `Contains` - Returns true of an object is found in the list.
+  - `TrimToSize` - Sets the capacity to the length of the list.
+  - `Clear` - Empties the list.
+  - `IsEmpty` - Returns true of the list is empty.
+  - `Destroy` - Destroys the GameObject (mem/scene cleanup)
+- `JilwerIntrinsic` - Not currently used (old system that may be reused)
+- VectorMath Methods
+  - `Abs` - Each components absolute value.
+  - `Max` - Max of each component between two Vectors.
+  - `Min` - Min of each component between two Vectors.
+- SDFMath Methods
+  - `SDSphere` - Returns distance from sphere surface.
+  - `SDBox` - Returns distance from box surface.
+- ArrayMath Methods
+  - `Index2DTo1D`, `Index3DTo1D`, `Index1DTo2D`, `Index1DTo3D` - Converts
+between index of different array ranks.
+- `ObjectPoolSpawner` - Spawns copies of an object that attach to a
+`VRCObjectPool`.
+- NetworkUtilities methods
+  - `SetOwner` - Sets a player to be the owner of an object.
+  - `TakeOwner` - Sets the local player to be the owner of an object.
+
+### Changed
+
+- ArrayList Methods
+  - `Insert(object item, int index)` is now `Add(int index, object item)`.
+
+### Removed
+
+- `ArrayList.New` - Use constructors now.
+
 ## [0.3.0](https://github.com/Gravinium-VR/Jilwer/releases/tag/0.3.0) - 2026-07-05
 
 ### Notes
